@@ -85,6 +85,10 @@ module.exports = {
 
     return amount;
   },
+  betsMatch: function(bet1, bet2) {
+    // Bets match if the types match - for now
+    return (bet1.type === bet2.type);
+  },
   setEvent: function(event) {
     globalEvent = event;
   },
@@ -126,22 +130,6 @@ module.exports = {
       }
 
       callback(speech);
-    });
-  },
-  saveNewUser: function() {
-    // Brand new player - let's log this in our DB (async call)
-    const params = {
-              TableName: 'Craps',
-              Key: {userId: {S: 'game'}},
-              AttributeUpdates: {newUsers: {
-                  Action: 'ADD',
-                  Value: {N: '1'}},
-              }};
-
-    dynamodb.updateItem(params, (err, data) => {
-      if (err) {
-        console.log(err);
-      }
     });
   },
 };

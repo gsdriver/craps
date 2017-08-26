@@ -16,8 +16,8 @@ const resources = {
   'BET_EXCEEDS_MAX': 'Sorry, this bet exceeds the maximum bet of ${0}.',
   'BET_EXCEEDS_BANKROLL': 'Sorry, this bet exceeds your bankroll of ${0}.',
   'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of ${1}.',
-  'BET_INVALID_BET_POINT': 'Sorry, this bet can\'t be played until a point has been established.',
-  'BET_INVALID_NO_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
+  'INVALID_BET_NO_POINT': 'Sorry, this bet can\'t be played until a point has been established.',
+  'INVALID_BET_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
   'LINEBET_PLACED': '${0} bet placed.',
   'ODDS_BET_PLACED': '${0} odds placed.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
@@ -27,6 +27,11 @@ const resources = {
   'EXIT_GAME': '{0} Goodbye.',
   // From HighScore.js
   'HIGHSCORE_REPROMPT': 'What else can I help you with?',
+  // Launch.js
+  'LAUNCH_REPROMPT': 'You can place a line bet or say read high scores to hear the leader board.',
+  'LAUNCH_WELCOME': 'Welcome to Craps Table. ',
+  'LAUNCH_WELCOME_NAME': 'Welcome back {0}. ',
+  'LAUNCH_REGISTER': ' <break time=\'300ms\'/>If you would like to register to have your name on the leader board please visit the Alexa companion app. ',
   // From utils.js
   'LEADER_RANKING': 'Your current bankroll of ${0} ranks you as <say-as interpret-as="ordinal">{1}</say-as> of {2} players. ',
   'LEADER_NO_SCORES': 'Sorry, I\'m unable to read the current leader board',

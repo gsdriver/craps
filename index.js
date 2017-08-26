@@ -14,6 +14,7 @@ const HighScore = require('./intents/HighScore');
 const Help = require('./intents/Help');
 const Exit = require('./intents/Exit');
 const utils = require('./utils');
+const request = require('request');
 
 const APP_ID = 'amzn1.ask.skill.dcc3c959-8c93-4e9a-9cdf-ccdccd5733fd';
 
@@ -50,7 +51,6 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   'OddsBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
   'RulesIntent': Rules.handleIntent,
-  'SelectIntent': Select.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
   'AMAZON.NoIntent': Exit.handleIntent,
@@ -109,7 +109,8 @@ exports.handler = function(event, context, callback) {
         if (err) {
           console.log('Error reading attributes ' + err);
         } else {
-          utils.saveNewUser();
+          request.post({url: process.env.SERVICEURL + 'craps/newUser'}, (err, res, body) => {
+          });
         }
       } else {
         Object.assign(event.session.attributes, data.Item.mapAttr);

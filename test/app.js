@@ -11,7 +11,7 @@ function BuildEvent(argv)
 {
   // Templates that can fill in the intent
   const bet = {'name': 'BetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
-  const odds = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const roll = {'name': 'SpinIntent', 'slots': {}};
   const rules = {'name': 'RulesIntent', 'slots': {}};
   const reset = {'name': 'ResetIntent', 'slots': {}};
