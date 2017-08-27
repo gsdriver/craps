@@ -1,0 +1,47 @@
+PassBetIntent bet
+PassBetIntent place a bet
+PassBetIntent place a pass bet
+PassBetIntent place a pass line bet
+PassBetIntent bet {Amount}
+PassBetIntent bet {Amount} dollars
+PassBetIntent bet {Amount} units
+PassBetIntent place a bet for {Amount}
+PassBetIntent place a bet for {Amount} dollars
+PassBetIntent place a bet for {Amount} units
+PassBetIntent place a pass bet for {Amount}
+PassBetIntent place a pass bet for {Amount} dollars
+PassBetIntent place a pass bet for {Amount} units
+PassBetIntent place a pass line bet for {Amount}
+PassBetIntent place a pass line bet for {Amount} dollars
+PassBetIntent place a pass line bet for {Amount} units
+
+OddsBetIntent place odds
+OddsBetIntent place an odds bet
+OddsBetIntent lay odds for {Amount}
+OddsBetIntent lay odds for {Amount} dollars
+OddsBetIntent lay odds for {Amount} units
+OddsBetIntent place odds for {Amount}
+OddsBetIntent place odds for {Amount} dollars
+OddsBetIntent place odds for {Amount} units
+
+ResetIntent reset game
+ResetIntent reset bankroll
+ResetIntent reset the game
+ResetIntent reset the bankroll
+ResetIntent reset my game
+ResetIntent reset my bankroll
+ResetIntent reset
+
+RollIntent roll the dice
+RollIntent shoot the dice
+RollIntent roll
+RollIntent shoot
+RollIntent let's play
+
+HighScoreIntent read high scores
+HighScoreIntent tell me high scores
+HighScoreIntent what are the high scores
+HighScoreIntent what is the leader board
+HighScoreIntent read leader board
+HighScoreIntent say high scores
+HighScoreIntent say leader board

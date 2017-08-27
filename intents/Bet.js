@@ -18,7 +18,7 @@ module.exports = {
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
       'POINT': ['OddsBetIntent'],
-      'NOPOINT': ['BetIntent'],
+      'NOPOINT': ['PassBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -60,10 +60,10 @@ module.exports = {
     if (!speechError) {
       // OK, we're good to bet - let's set up the numbers and type
       switch (this.event.request.intent.name) {
-        case 'BetIntent':
+        case 'PassBetIntent':
           game.lineBet = bet.amount;
-          bet.type = 'LineBet';
-          speech = res.strings.LINEBET_PLACED;
+          bet.type = 'PassBet';
+          speech = res.strings.PASSBET_PLACED;
           break;
         case 'OddsBetIntent':
           bet.type = 'OddsBet';

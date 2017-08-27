@@ -10,9 +10,9 @@ const USERID = 'not-amazon';
 function BuildEvent(argv)
 {
   // Templates that can fill in the intent
-  const bet = {'name': 'BetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const bet = {'name': 'PassBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
-  const roll = {'name': 'SpinIntent', 'slots': {}};
+  const roll = {'name': 'RollIntent', 'slots': {}};
   const rules = {'name': 'RulesIntent', 'slots': {}};
   const reset = {'name': 'ResetIntent', 'slots': {}};
   const yes = {'name': 'AMAZON.YesIntent', 'slots': {}};
@@ -26,7 +26,7 @@ function BuildEvent(argv)
     "session": {
       "sessionId": "SessionId.c88ec34d-28b0-46f6-a4c7-120d8fba8fa7",
       "application": {
-        "applicationId": "amzn1.ask.skill.dcc3c959-8c93-4e9a-9cdf-ccdccd5733fd"
+        "applicationId": "amzn1.ask.skill.f899a65f-5849-4ecd-a7fb-9b659e21fccb"
       },
       "attributes": {},
       "user": {
@@ -48,7 +48,7 @@ function BuildEvent(argv)
     "session": {
       "sessionId": "SessionId.c88ec34d-28b0-46f6-a4c7-120d8fba8fa7",
       "application": {
-        "applicationId": "amzn1.ask.skill.dcc3c959-8c93-4e9a-9cdf-ccdccd5733fd"
+        "applicationId": "amzn1.ask.skill.f899a65f-5849-4ecd-a7fb-9b659e21fccb"
       },
       "attributes": {},
       "user": {

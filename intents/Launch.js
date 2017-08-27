@@ -20,8 +20,6 @@ module.exports = {
       speech = res.strings.LAUNCH_WELCOME;
     }
 
-    const game = this.attributes[this.attributes.currentGame];
-
     // If they aren't registered users, tell them about that option
     if (!this.event.session.user.accessToken && process.env.ALLOWREGISTER) {
       speech += res.strings.LAUNCH_REGISTER;

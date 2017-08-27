@@ -6,7 +6,6 @@
 
 const AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
-const dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 const speechUtils = require('alexa-speech-utils')();
 const request = require('request');
@@ -78,8 +77,8 @@ module.exports = {
       // Check if they have a previous bet amount and reuse that
       if (game.bets && (game.bets.length > 0)) {
         amount = game.bets[0].amount;
-      } else if (game.lastbets && (game.lastbets.length > 0)) {
-        amount = game.lastbets[0].amount;
+      } else if (game.lineBet) {
+        amount = game.lineBet;
       }
     }
 

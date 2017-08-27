@@ -13,18 +13,39 @@ const Rules = require('./intents/Rules');
 const HighScore = require('./intents/HighScore');
 const Help = require('./intents/Help');
 const Exit = require('./intents/Exit');
+const Reset = require('./intents/Reset');
 const utils = require('./utils');
 const request = require('request');
 
-const APP_ID = 'amzn1.ask.skill.dcc3c959-8c93-4e9a-9cdf-ccdccd5733fd';
+const APP_ID = 'amzn1.ask.skill.f899a65f-5849-4ecd-a7fb-9b659e21fccb';
 
 // Handlers for our skill
+const resetHandlers = Alexa.CreateStateHandler('CONFIRMRESET', {
+  'NewSession': function() {
+    this.handler.state = '';
+    this.emitWithState('NewSession');
+  },
+  'LaunchRequest': Reset.handleNoReset,
+  'AMAZON.YesIntent': Reset.handleYesReset,
+  'AMAZON.NoIntent': Reset.handleNoReset,
+  'AMAZON.StopIntent': Exit.handleIntent,
+  'AMAZON.CancelIntent': Reset.handleNoReset,
+  'SessionEndedRequest': function() {
+    saveState(this.event.session.user.userId, this.attributes);
+  },
+  'Unhandled': function() {
+    const res = require('./' + this.event.request.locale + '/resources');
+    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+              res.strings.UNKNOWNINTENT_RESET, res.strings.UNKNOWNINTENT_RESET_REPROMPT);
+  },
+});
+
 const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'NewSession': function() {
     this.handler.state = '';
     this.emitWithState('NewSession');
   },
-  'BetIntent': Bet.handleIntent,
+  'PassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
   'RulesIntent': Rules.handleIntent,
@@ -47,7 +68,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
     this.handler.state = '';
     this.emitWithState('NewSession');
   },
-  'BetIntent': Bet.handleIntent,
+  'PassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
   'RulesIntent': Rules.handleIntent,
@@ -80,6 +101,7 @@ const handlers = {
         high: 1000,
         minBet: 5,
         maxOdds: 10,
+        canReset: true,
       };
     }
 
@@ -124,7 +146,7 @@ exports.handler = function(event, context, callback) {
 
   function execute() {
     utils.setEvent(event);
-    alexa.registerHandlers(handlers, noPointHandlers, pointHandlers);
+    alexa.registerHandlers(handlers, resetHandlers, noPointHandlers, pointHandlers);
     alexa.execute();
   }
 };
