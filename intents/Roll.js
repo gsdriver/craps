@@ -18,7 +18,7 @@ module.exports = {
     // If they have a line bet but no bet array - it means they want to reuse
     // the same bet from last time - let's make sure they can cover it
     if (game.lineBet && !game.bets) {
-      if (game.lineBet < game.bankroll) {
+      if (game.lineBet > game.bankroll) {
         speechError = res.strings.ROLL_CANTBET_LASTBETS.replace('{0}', game.bankroll);
         reprompt = res.strings.ROLL_INVALID_REPROMPT;
         utils.emitResponse(this.emit, this.event.request.locale,
@@ -26,7 +26,7 @@ module.exports = {
         return;
       } else {
         game.bankroll -= game.lineBet;
-        game.bets = {type: 'PassBet', amount: game.lineBet};
+        game.bets = [{type: 'PassBet', amount: game.lineBet}];
       }
     }
 
@@ -79,14 +79,6 @@ module.exports = {
       }
     });
 
-    if (won > lost) {
-      speech += res.strings.ROLL_NET_WIN.replace('{0}', won - lost);
-    } else if (lost < won) {
-      speech += res.strings.ROLL_NET_LOSE.replace('{0}', lost - won);
-    } else if (won > 0) {
-      speech += res.strings.ROLL_NET_PUSH;
-    }
-
     // Transition game state if necessary
     if (this.handler.state === 'NOPOINT') {
       // Transitions to point if not 2, 3, 7, 11, or 12
@@ -101,7 +93,21 @@ module.exports = {
         game.bets = undefined;
         this.handler.state = 'NOPOINT';
         game.rounds++;
+        if (total === 7) {
+          speech += res.strings.ROLL_SEVEN_CRAPS;
+          reprompt = res.strings.ROLL_COME_REPROMPT;
+        } else {
+          speech += res.strings.ROLL_GOT_POINT;
+        }
       }
+    }
+
+    if (won > lost) {
+      speech += res.strings.ROLL_NET_WIN.replace('{0}', won - lost);
+    } else if (lost > won) {
+      speech += res.strings.ROLL_NET_LOSE.replace('{0}', lost - won);
+    } else if (won > 0) {
+      speech += res.strings.ROLL_NET_PUSH;
     }
 
     // OK, let's see if they are out of money

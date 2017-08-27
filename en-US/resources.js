@@ -34,6 +34,11 @@ const resources = {
   'LAUNCH_WELCOME': 'Welcome to Craps Table. ',
   'LAUNCH_WELCOME_NAME': 'Welcome back {0}. ',
   'LAUNCH_REGISTER': ' <break time=\'300ms\'/>If you would like to register to have your name on the leader board please visit the Alexa companion app. ',
+  // From Repeat.js
+  'READ_REPROMPT': 'What else can I help you with?',
+  'READ_BANKROLL': 'You have ${0}. ',
+  'READ_POINT': 'The point is {0}. ',
+  'READ_BETS': 'You bet {0}. ',
   // From Reset.js
   'RESET_CONFIRM': 'Would you like to reset the game? This will reset your bankroll, clear all bets, and abort the current roll.',
   'RESET_COMPLETED': 'You have $1000. You can place a line bet or say read high scores to hear the leader board.',
@@ -52,6 +57,9 @@ const resources = {
   'ROLL_NET_LOSE': ' You lost ${0}. ',
   'ROLL_NET_PUSH': ' You broke even. ',
   'ROLL_REPROMPT': 'Say roll to roll the dice.',
+  'ROLL_COME_REPROMPT': 'Bet or say roll for the come out roll.',
+  'ROLL_SEVEN_CRAPS': 'Craps 7! ',
+  'ROLL_GOT_POINT': 'You rolled the point! ',
   // From utils.js
   'LEADER_RANKING': 'Your current bankroll of ${0} ranks you as <say-as interpret-as="ordinal">{1}</say-as> of {2} players. ',
   'LEADER_NO_SCORES': 'Sorry, I\'m unable to read the current leader board',
@@ -72,21 +80,38 @@ module.exports = {
     const hardFormat = 'double {0}s|hard {2}|{2} the hard way';
     const easyFormat = '{0} and {1} for a total of {2}|{0} and {1} for an easy {2}';
     const otherFormat = '{0} and {1} for a total of {2}';
-    const easy = (dice[0] !== dice[1]);
+    const hard = (dice[0] === dice[1]);
     const total = dice[0] + dice[1];
     let format;
 
     if (totalFormat[total]) {
       format = pickRandomOption(totalFormat[2]);
-    } else if (easy) {
-      format = pickRandomOption(easyFormat);
-    } else if (total % 2 === 0) {
+    } else if (hard) {
       format = pickRandomOption(hardFormat);
+    } else if (total % 2 === 0) {
+      format = pickRandomOption(easyFormat);
     } else {
       format = pickRandomOption(otherFormat);
     }
 
     return format.replace('{0}', dice[0]).replace('{1}', dice[1]).replace('{2}', total);
+  },
+  sayBet: function(bet) {
+    let format;
+
+    switch (bet.type) {
+      case 'PassBet':
+        format = '${0} on the pass line';
+        break;
+      case 'OddsBet':
+        format = '${0} odds';
+        break;
+      default:
+        format = '${0}';
+        break;
+    }
+
+    return format.replace('{0}', bet.amount);
   },
 };
 

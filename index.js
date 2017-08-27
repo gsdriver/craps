@@ -9,11 +9,11 @@ const Alexa = require('alexa-sdk');
 const Launch = require('./intents/Launch');
 const Bet = require('./intents/Bet');
 const Roll = require('./intents/Roll');
-const Rules = require('./intents/Rules');
 const HighScore = require('./intents/HighScore');
 const Help = require('./intents/Help');
 const Exit = require('./intents/Exit');
 const Reset = require('./intents/Reset');
+const Repeat = require('./intents/Repeat');
 const utils = require('./utils');
 const request = require('request');
 
@@ -48,8 +48,8 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'PassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
-  'RulesIntent': Rules.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
+  'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.HelpIntent': Help.handleIntent,
   'AMAZON.StopIntent': Exit.handleIntent,
   'AMAZON.CancelIntent': Exit.handleIntent,
@@ -71,8 +71,8 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   'PassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
-  'RulesIntent': Rules.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
+  'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
   'AMAZON.NoIntent': Exit.handleIntent,
   'AMAZON.HelpIntent': Help.handleIntent,
