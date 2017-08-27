@@ -29,6 +29,6 @@ module.exports = {
 
     speech += reprompt;
     utils.emitResponse(this.emit, this.event.request.locale,
-        null, speech, reprompt, null);
+        null, null, speech, reprompt);
   },
 };

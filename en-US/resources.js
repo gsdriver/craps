@@ -60,6 +60,7 @@ const resources = {
   'ROLL_COME_REPROMPT': 'Bet or say roll for the come out roll.',
   'ROLL_SEVEN_CRAPS': 'Craps 7! ',
   'ROLL_GOT_POINT': 'You rolled the point! ',
+  'ROLL_OFF_TABLE': 'Oops, one of the dice fell off the table - rolling again. ',
   // From utils.js
   'LEADER_RANKING': 'Your current bankroll of ${0} ranks you as <say-as interpret-as="ordinal">{1}</say-as> of {2} players. ',
   'LEADER_NO_SCORES': 'Sorry, I\'m unable to read the current leader board',

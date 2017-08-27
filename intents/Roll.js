@@ -39,9 +39,26 @@ module.exports = {
 
     // Pick two random dice rolls
     game.dice = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
+    game.rolls++;
     const total = game.dice[0] + game.dice[1];
 
+    speech += '<audio src=\"https://s3-us-west-2.amazonaws.com/alexasoundclips/dice.mp3\"/> ';
+
     // Let's see if the dice fell off the table
+    let offTable;
+    if (game.rolls === 4) {
+      // Fourth roll falls off table
+      offTable = true;
+    } else if (game.rolls > 4) {
+      // 5% chance
+      if (Math.floor(Math.random() * 20) === 1) {
+        offTable = true;
+      }
+    }
+    if (offTable) {
+      speech += res.strings.ROLL_OFF_TABLE;
+      speech += '<audio src=\"https://s3-us-west-2.amazonaws.com/alexasoundclips/dice.mp3\"/> ';
+    }
 
     speech += res.strings.ROLL_RESULT.replace('{0}', res.sayRoll(game.dice));
 
