@@ -84,20 +84,34 @@ module.exports = {
 
     return amount;
   },
-  passBet: function(amount) {
-    return {
-      type: 'PassBet',
-      amount: amount,
-      winningRolls: {7: 1},
-      losingRolls: [2, 3, 12],
-    };
+  createLineBet: function(amount, pass) {
+    let bet;
+
+    if (pass) {
+      bet = {
+        type: 'PassBet',
+        amount: amount,
+        winningRolls: {7: 1},
+        losingRolls: [2, 3, 12],
+      };
+    } else {
+      bet = {
+        type: 'DontPassBet',
+        amount: amount,
+        winningRolls: {2: 1, 3: 1, 12: 0},
+        losingRolls: [7, 11],
+      };
+    }
+
+    return bet;
   },
   getLineBet: function(bets) {
     let linebet;
 
     if (bets) {
       bets.forEach((bet) => {
-        if (bet.type === 'PassBet') {
+        if ((bet.type === 'PassBet') ||
+            (bet.type === 'DontPassBet')) {
           linebet = bet;
         }
       });

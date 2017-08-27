@@ -10,6 +10,15 @@
       ]
     },
     {
+      "intent": "DontPassBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "OddsBetIntent",
       "slots": [
         {

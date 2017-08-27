@@ -15,6 +15,21 @@ PassBetIntent place a pass line bet for {Amount}
 PassBetIntent place a pass line bet for {Amount} dollars
 PassBetIntent place a pass line bet for {Amount} units
 
+DontPassBetIntent place a don't pass bet
+DontPassBetIntent place a don't pass line bet
+DontPassBetIntent bet {Amount} on don't pass
+DontPassBetIntent bet {Amount} dollars on don't pass
+DontPassBetIntent bet {Amount} units on don't pass
+DontPassBetIntent place a bet for {Amount} on don't pass
+DontPassBetIntent place a bet for {Amount} dollars on don't pass
+DontPassBetIntent place a bet for {Amount} units on don't pass
+DontPassBetIntent place a don't pass bet for {Amount}
+DontPassBetIntent place a don't pass bet for {Amount} dollars
+DontPassBetIntent place a don't pass bet for {Amount} units
+DontPassBetIntent place a don't pass line bet for {Amount}
+DontPassBetIntent place a don't pass line bet for {Amount} dollars
+DontPassBetIntent place a don't pass line bet for {Amount} units
+
 OddsBetIntent place odds
 OddsBetIntent place an odds bet
 OddsBetIntent lay odds for {Amount}

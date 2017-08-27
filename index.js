@@ -46,6 +46,7 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
     this.emitWithState('NewSession');
   },
   'PassBetIntent': Bet.handleIntent,
+  'DontPassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'FieldBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,
@@ -70,6 +71,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
     this.emitWithState('NewSession');
   },
   'PassBetIntent': Bet.handleIntent,
+  'DontPassBetIntent': Bet.handleIntent,
   'OddsBetIntent': Bet.handleIntent,
   'FieldBetIntent': Bet.handleIntent,
   'RollIntent': Roll.handleIntent,

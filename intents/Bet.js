@@ -18,7 +18,7 @@ module.exports = {
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
       'POINT': ['OddsBetIntent', 'FieldBetIntent'],
-      'NOPOINT': ['PassBetIntent', 'FieldBetIntent'],
+      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -32,6 +32,14 @@ module.exports = {
         speechError = res.strings.INVALID_BET_NO_POINT;
         reprompt = res.strings.BET_INVALID_REPROMPT;
       }
+    }
+
+    // If this is pass or don't pass, make sure we don't already have a line bet
+    if (((this.event.request.intent.name === 'PassBetIntent') ||
+          (this.event.request.intent.name === 'DontPassBetIntent'))
+        && utils.getLineBet(game.bets)) {
+      speechError = res.strings.INVALID_BET_HAVE_LINEBET;
+      reprompt = res.strings.BET_INVALID_REPROMPT;
     }
 
     // Keep validating input if we don't have an error yet
@@ -60,18 +68,31 @@ module.exports = {
     if (!speechError) {
       // OK, we're good to bet - let's set up the numbers and type
       switch (this.event.request.intent.name) {
+        case 'DontPassBetIntent':
+          game.lineBet = bet.amount;
+          game.passPlayer = false;
+          bet = utils.createLineBet(bet.amount, game.passPlayer);
+          speech = res.strings.DONTPASSBET_PLACED;
+          break;
         case 'PassBetIntent':
           game.lineBet = bet.amount;
-          bet = utils.passBet(bet.amount);
+          game.passPlayer = true;
+          bet = utils.createLineBet(bet.amount, game.passPlayer);
           speech = res.strings.PASSBET_PLACED;
           break;
         case 'OddsBetIntent':
-          const payout = {4: 2, 5: 1.5, 6: 1.2, 8: 1.2, 9: 1.5, 10: 2};
           bet.type = 'OddsBet';
-          bet.winningRolls = {};
-          bet.winningRolls[game.point] = payout[game.point];
-          bet.losingRolls = [7];
           speech = res.strings.ODDS_BET_PLACED;
+          if (utils.getLineBet(game.bets).type === 'PassBet') {
+            const payout = {4: 2, 5: 1.5, 6: 1.2, 8: 1.2, 9: 1.5, 10: 2};
+            bet.winningRolls = {};
+            bet.winningRolls[game.point] = payout[game.point];
+            bet.losingRolls = [7];
+          } else {
+            const payout = {4: 0.5, 5: 0.6667, 6: 0.8334, 8: 0.8334, 9: 0.6667, 10: 0.5};
+            bet.winningRolls = {7: payout[game.point]};
+            bet.losingRolls = [game.point];
+          }
           break;
         case 'FieldBetIntent':
           bet.type = 'FieldBet';

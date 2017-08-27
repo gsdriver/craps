@@ -20,7 +20,9 @@ const resources = {
   'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of ${1}.',
   'INVALID_BET_NO_POINT': 'Sorry, this bet can\'t be played until a point has been established.',
   'INVALID_BET_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
+  'INVALID_BET_HAVE_LINEBET': 'Sorry, you already have a line bet in play.',
   'PASSBET_PLACED': '${0} pass bet placed.',
+  'DONTPASSBET_PLACED': '${0} don\'t pass bet placed.',
   'ODDS_BET_PLACED': '${0} odds placed.',
   'FIELD_BET_PLACED': '${0} field bet placed.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
@@ -114,6 +116,9 @@ module.exports = {
     switch (bet.type) {
       case 'PassBet':
         format = '${0} on the pass line';
+        break;
+      case 'DontPassBet':
+        format = '${0} on the don\'t pass line';
         break;
       case 'OddsBet':
         format = '${0} odds';

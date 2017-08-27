@@ -29,7 +29,7 @@ module.exports = {
         if (!game.bets) {
           game.bets = [];
         }
-        game.bets.push(utils.passBet(game.lineBet));
+        game.bets.push(utils.createLineBet(game.lineBet, game.passPlayer));
       }
     }
 
@@ -111,6 +111,13 @@ module.exports = {
             bet.winningRolls = {};
             bet.winningRolls[game.point] = 1;
             bet.losingRolls = [7];
+          }
+        }
+        if (bet.type === 'DontPassBet') {
+          if ((this.handler.state === 'NOPOINT')
+            && (newState === 'POINT')) {
+            bet.winningRolls = {7: 1};
+            bet.losingRolls = [game.point];
           }
         }
         if (!bet.singleRoll) {
