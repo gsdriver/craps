@@ -17,8 +17,8 @@ module.exports = {
     const res = require('../' + this.event.request.locale + '/resources');
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
-      'POINT': ['OddsBetIntent', 'FieldBetIntent'],
-      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent'],
+      'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent'],
+      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent', 'CrapsBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -100,6 +100,13 @@ module.exports = {
           bet.losingRolls = [5, 6, 7, 8];
           bet.singleRoll = true;
           speech = res.strings.FIELD_BET_PLACED;
+          break;
+        case 'CrapsBetIntent':
+          bet.type = 'CrapsBet';
+          bet.winningRolls = {2: 7, 3: 7, 12: 7};
+          bet.losingRolls = [4, 5, 6, 7, 8, 9, 10, 11];
+          bet.singleRoll = true;
+          speech = res.strings.CRAPS_BET_PLACED;
           break;
         default:
           // This shouldn't happen

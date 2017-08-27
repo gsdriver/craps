@@ -25,6 +25,7 @@ const resources = {
   'DONTPASSBET_PLACED': '${0} don\'t pass bet placed.',
   'ODDS_BET_PLACED': '${0} odds placed.',
   'FIELD_BET_PLACED': '${0} field bet placed.',
+  'CRAPS_BET_PLACED': '${0} craps bet placed.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
   'BET_DUPLICATE_NOT_ADDED': 'You already placed ${0} on this bet, and another ${1} would exceed the maximum bet of ${2}. ',
   'BET_PLACED_REPROMPT': 'Place another bet or say roll to roll the dice.',
@@ -125,6 +126,9 @@ module.exports = {
         break;
       case 'FieldBet':
         format = 'a ${0} field bet';
+        break;
+      case 'CrapsBet':
+        format = 'a ${0} craps bet';
         break;
       default:
         format = '${0}';

@@ -13,12 +13,16 @@ module.exports = {
     const reprompt = res.strings.LAUNCH_REPROMPT;
     let speech;
     let linQ;
+    const game = this.attributes[this.attributes.currentGame];
 
     if (this.attributes.firstName) {
       speech = res.strings.LAUNCH_WELCOME_NAME.replace('{0}', this.attributes.firstName);
     } else {
       speech = res.strings.LAUNCH_WELCOME;
     }
+
+    // Add the bankroll
+    speech += res.strings.READ_BANKROLL.replace('{0}', game.bankroll);
 
     // If they aren't registered users, tell them about that option
     if (!this.event.session.user.accessToken && process.env.ALLOWREGISTER) {

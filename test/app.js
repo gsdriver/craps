@@ -14,6 +14,7 @@ function BuildEvent(argv)
   const dontpassbet = {'name': 'DontPassBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const fieldbet = {'name': 'FieldBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const crapsbet = {'name': 'CrapsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const roll = {'name': 'RollIntent', 'slots': {}};
   const rules = {'name': 'RulesIntent', 'slots': {}};
   const reset = {'name': 'ResetIntent', 'slots': {}};
@@ -102,6 +103,11 @@ function BuildEvent(argv)
     lambda.request.intent = fieldbet;
     if (argv.length > 3) {
       fieldbet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'crapsbet') {
+    lambda.request.intent = crapsbet;
+    if (argv.length > 3) {
+      crapsbet.slots.Amount.value = argv[3];
     }
   } else if (argv[2] == 'rules') {
     lambda.request.intent = rules;

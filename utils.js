@@ -91,7 +91,7 @@ module.exports = {
       bet = {
         type: 'PassBet',
         amount: amount,
-        winningRolls: {7: 1},
+        winningRolls: {7: 1, 11: 1},
         losingRolls: [2, 3, 12],
       };
     } else {
