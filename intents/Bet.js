@@ -13,12 +13,12 @@ module.exports = {
     let reprompt;
     let speechError;
     let speech;
-    const bet = {};
+    let bet = {};
     const res = require('../' + this.event.request.locale + '/resources');
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
-      'POINT': ['OddsBetIntent'],
-      'NOPOINT': ['PassBetIntent'],
+      'POINT': ['OddsBetIntent', 'FieldBetIntent'],
+      'NOPOINT': ['PassBetIntent', 'FieldBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -62,12 +62,23 @@ module.exports = {
       switch (this.event.request.intent.name) {
         case 'PassBetIntent':
           game.lineBet = bet.amount;
-          bet.type = 'PassBet';
+          bet = utils.passBet(bet.amount);
           speech = res.strings.PASSBET_PLACED;
           break;
         case 'OddsBetIntent':
+          const payout = {4: 2, 5: 1.5, 6: 1.2, 8: 1.2, 9: 1.5, 10: 2};
           bet.type = 'OddsBet';
+          bet.winningRolls = {};
+          bet.winningRolls[game.point] = payout[game.point];
+          bet.losingRolls = [7];
           speech = res.strings.ODDS_BET_PLACED;
+          break;
+        case 'FieldBetIntent':
+          bet.type = 'FieldBet';
+          bet.winningRolls = {2: 2, 3: 1, 4: 1, 9: 1, 10: 1, 11: 1, 12: 3};
+          bet.losingRolls = [5, 6, 7, 8];
+          bet.singleRoll = true;
+          speech = res.strings.FIELD_BET_PLACED;
           break;
         default:
           // This shouldn't happen

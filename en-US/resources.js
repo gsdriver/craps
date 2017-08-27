@@ -22,6 +22,7 @@ const resources = {
   'INVALID_BET_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
   'PASSBET_PLACED': '${0} pass bet placed.',
   'ODDS_BET_PLACED': '${0} odds placed.',
+  'FIELD_BET_PLACED': '${0} field bet placed.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
   'BET_DUPLICATE_NOT_ADDED': 'You already placed ${0} on this bet, and another ${1} would exceed the maximum bet of ${2}. ',
   'BET_PLACED_REPROMPT': 'Place another bet or say roll to roll the dice.',
@@ -48,7 +49,7 @@ const resources = {
   'RESET_NORESET': 'Sorry, you can\'t reset your bankroll. What else can I help you with?',
   // From Roll.js
   'ROLL_RESULT': 'You got {0}. ',
-  'ROLL_NOBETS': 'Sorry, you have to place a bet before you can roll the dice.',
+  'ROLL_NOBETS': 'Sorry, you have to place a line bet before you can roll the dice.',
   'ROLL_INVALID_REPROMPT': 'Place a bet',
   'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of ${0} can\'t support your last line bet.',
   'ROLL_BUSTED': 'You lost all your money. Resetting to $1000 and clearing your bets. ',
@@ -86,12 +87,22 @@ module.exports = {
     let format;
 
     if (totalFormat[total]) {
-      format = pickRandomOption(totalFormat[2]);
+      format = pickRandomOption(totalFormat[total]);
     } else if (hard) {
       format = pickRandomOption(hardFormat);
     } else if (total % 2 === 0) {
       format = pickRandomOption(easyFormat);
     } else {
+      // If one of the dice is 1, we may say "and a pimple"
+      if (((dice[0] === 1) || (dice[1] === 1)) &&
+        (Math.floor(Math.random() * 5) === 1)) {
+        if (dice[0] === 1) {
+          format = '{1} and a pimple makes {2}';
+        } else {
+          format = '{0} and a pimple makes {2}';
+        }
+      }
+
       format = pickRandomOption(otherFormat);
     }
 
@@ -106,6 +117,9 @@ module.exports = {
         break;
       case 'OddsBet':
         format = '${0} odds';
+        break;
+      case 'FieldBet':
+        format = 'a ${0} field bet';
         break;
       default:
         format = '${0}';

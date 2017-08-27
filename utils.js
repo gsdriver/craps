@@ -84,6 +84,27 @@ module.exports = {
 
     return amount;
   },
+  passBet: function(amount) {
+    return {
+      type: 'PassBet',
+      amount: amount,
+      winningRolls: {7: 1},
+      losingRolls: [2, 3, 12],
+    };
+  },
+  getLineBet: function(bets) {
+    let linebet;
+
+    if (bets) {
+      bets.forEach((bet) => {
+        if (bet.type === 'PassBet') {
+          linebet = bet;
+        }
+      });
+    }
+
+    return linebet;
+  },
   betsMatch: function(bet1, bet2) {
     // Bets match if the types match - for now
     return (bet1.type === bet2.type);

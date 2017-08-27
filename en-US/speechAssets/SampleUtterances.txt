@@ -24,6 +24,18 @@ OddsBetIntent place odds for {Amount}
 OddsBetIntent place odds for {Amount} dollars
 OddsBetIntent place odds for {Amount} units
 
+FieldBetIntent place a field bet
+FieldBetIntent play the field
+FieldBetIntent place a field bet for {Amount}
+FieldBetIntent place a field bet for {Amount} dollars
+FieldBetIntent place a field bet for {Amount} units
+FieldBetIntent play the field for {Amount}
+FieldBetIntent play the field for {Amount} dollars
+FieldBetIntent play the field for {Amount} units
+FieldBetIntent field for {Amount}
+FieldBetIntent field for {Amount} dollars
+FieldBetIntent field for {Amount} units
+
 ResetIntent reset game
 ResetIntent reset bankroll
 ResetIntent reset the game

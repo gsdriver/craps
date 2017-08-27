@@ -12,6 +12,7 @@ function BuildEvent(argv)
   // Templates that can fill in the intent
   const bet = {'name': 'PassBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const fieldbet = {'name': 'FieldBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const roll = {'name': 'RollIntent', 'slots': {}};
   const rules = {'name': 'RulesIntent', 'slots': {}};
   const reset = {'name': 'ResetIntent', 'slots': {}};
@@ -90,6 +91,11 @@ function BuildEvent(argv)
     lambda.request.intent = oddsbet;
     if (argv.length > 3) {
       oddsbet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'fieldbet') {
+    lambda.request.intent = fieldbet;
+    if (argv.length > 3) {
+      fieldbet.slots.Amount.value = argv[3];
     }
   } else if (argv[2] == 'rules') {
     lambda.request.intent = rules;

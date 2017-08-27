@@ -19,6 +19,15 @@
       ]
     },
     {
+      "intent": "FieldBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "RollIntent"
     },
     {
