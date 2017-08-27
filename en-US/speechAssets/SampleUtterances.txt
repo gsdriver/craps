@@ -51,6 +51,14 @@ FieldBetIntent field for {Amount}
 FieldBetIntent field for {Amount} dollars
 FieldBetIntent field for {Amount} units
 
+CrapsBetIntent place a craps bet
+CrapsBetIntent place a craps bet for {Amount}
+CrapsBetIntent place a craps bet for {Amount} dollars
+CrapsBetIntent place a craps bet for {Amount} units
+CrapsBetIntent craps for {Amount}
+CrapsBetIntent craps for {Amount} dollars
+CrapsBetIntent craps for {Amount} units
+
 ResetIntent reset game
 ResetIntent reset bankroll
 ResetIntent reset the game

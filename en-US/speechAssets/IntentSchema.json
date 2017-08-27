@@ -37,6 +37,15 @@
       ]
     },
     {
+      "intent": "CrapsBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "RollIntent"
     },
     {
