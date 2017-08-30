@@ -140,7 +140,8 @@ module.exports = {
       } else {
         // What is your ranking - assuming you've played a round
         if (game.rounds > 0) {
-          const ranking = scores.indexOf(game.bankroll) + 1;
+          const bankrolls = scores.map((a) => a.bankroll);
+          const ranking = bankrolls.indexOf(game.bankroll) + 1;
 
           speech += res.strings.LEADER_RANKING
             .replace('{0}', game.bankroll)
@@ -179,15 +180,21 @@ function getTopScoresFromS3(attributes, callback) {
       callback(err, null);
     } else {
       const ranking = JSON.parse(data.Body.toString('ascii'));
-      const scores = ranking[scoreSet];
-      const bankroll = scores.map((a) => a.bankroll);
+      const scores = ranking.scores;
 
-      // If their current high score isn't in the list, add it
-      if (bankroll.indexOf(myScore) < 0) {
-        scores.push({name: attributes.firstName, bankroll: myScore});
+      if (scores && scores[attributes.currentGame]) {
+        const bankroll = scores[attributes.currentGame].map((a) => a.bankroll);
+
+        // If their current high score isn't in the list, add it
+        if (bankroll.indexOf(myScore) < 0) {
+          scores.push({name: attributes.firstName, bankroll: myScore});
+        }
+
+        callback(null, scores[attributes.currentGame].sort((a, b) => (b.bankroll - a.bankroll)));
+      } else {
+        console.log('No scores for ' + attributes.currentGame);
+        callback('No scoreset', null);
       }
-
-      callback(null, scores.sort((a, b) => (b.bankroll - a.bankroll)));
     }
   });
 }
