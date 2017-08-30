@@ -171,7 +171,6 @@ module.exports = {
 
 function getTopScoresFromS3(attributes, callback) {
   // Read the S3 buckets that has everyone's scores
-  const scoreSet = attributes.currentGame + 'Scores';
   const myScore = attributes[attributes.currentGame].bankroll;
 
   s3.getObject({Bucket: 'garrett-alexa-usage', Key: 'CrapsScores.txt'}, (err, data) => {
