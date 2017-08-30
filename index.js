@@ -55,6 +55,8 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'RollIntent': Roll.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
+  'AMAZON.YesIntent': Roll.handleIntent,
+  'AMAZON.NoIntent': Exit.handleIntent,
   'AMAZON.HelpIntent': Help.handleIntent,
   'AMAZON.StopIntent': Exit.handleIntent,
   'AMAZON.CancelIntent': Exit.handleIntent,
