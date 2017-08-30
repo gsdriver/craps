@@ -46,6 +46,15 @@
       ]
     },
     {
+      "intent": "RemoveIntent",
+      "slots": [
+        {
+          "name": "Bet",
+          "type": "LIST_OF_BETS"
+        }
+      ]
+    },
+    {
       "intent": "RollIntent"
     },
     {

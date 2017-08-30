@@ -38,6 +38,13 @@ const resources = {
   'LAUNCH_WELCOME': 'Welcome to Craps Table. ',
   'LAUNCH_WELCOME_NAME': 'Welcome back {0}. ',
   'LAUNCH_REGISTER': ' <break time=\'300ms\'/>If you would like to register to have your name on the leader board please visit the Alexa companion app. ',
+  // From Remove.js
+  'REMOVE_REPROMPT': 'What else can I help you with?',
+  'REMOVE_NOBETS': 'You haven\'t placed any bets to remove. ',
+  'REMOVE_BETNOTPLACED': 'You haven\'t placed a {0}. ',
+  'REMOVE_UNKNOWN_BETTYPE': 'Sorry, I don\'t know what a {0} bet is. ',
+  'REMOVE_CANTREMOVE_PASSBET': 'Sorry, you can\'t remove a line bet once a point has been established. ',
+  'REMOVE_BET': 'Removing your bet of {0}. ',
   // From Repeat.js
   'READ_REPROMPT': 'What else can I help you with?',
   'READ_BANKROLL': 'You have ${0}. ',
@@ -61,7 +68,8 @@ const resources = {
   'ROLL_NET_LOSE': ' You lost ${0}. ',
   'ROLL_NET_PUSH': ' You broke even. ',
   'ROLL_REPROMPT': 'Say roll to roll the dice.',
-  'ROLL_COME_REPROMPT': 'Bet or say roll for the come out roll.',
+  'ROLL_COME_REPROMPT': 'Would you like to play another round?',
+  'ROLL_POINT_ESTABLISHED': 'The point has been established. ',
   'ROLL_SEVEN_CRAPS': 'Craps 7! ',
   'ROLL_GOT_POINT': 'You rolled the point! ',
   'ROLL_OFF_TABLE': 'Oops, one of the dice fell off the table - rolling again. ',
@@ -136,6 +144,11 @@ module.exports = {
     }
 
     return format.replace('{0}', bet.amount);
+  },
+  sayBetType: function(betType) {
+    const bets = {PassBet: 'pass line bet', DontPassBet: 'don\'t pass line bet',
+      OddsBet: 'odds bet', FieldBet: 'field bet', CrapsBet: 'craps bet'};
+    return (bets[betType]) ? bets[betType] : betType;
   },
 };
 

@@ -157,7 +157,7 @@ module.exports = {
           duplicateText = res.strings.BET_DUPLICATE_ADDED;
         }
       } else if (game.bets) {
-        game.bets.unshift(bet);
+        game.bets.push(bet);
       } else {
         game.bets = [bet];
       }

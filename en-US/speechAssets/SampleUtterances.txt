@@ -59,6 +59,12 @@ CrapsBetIntent craps for {Amount}
 CrapsBetIntent craps for {Amount} dollars
 CrapsBetIntent craps for {Amount} units
 
+RemoveIntent remove my {Bet} bet
+RemoveIntent remove the {Bet} bet
+RemoveIntent remove my bet
+RemoveIntent undo that bet
+RemoveIntent undo the {Bet} bet
+
 ResetIntent reset game
 ResetIntent reset bankroll
 ResetIntent reset the game

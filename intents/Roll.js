@@ -83,6 +83,7 @@ module.exports = {
       if ([2, 3, 7, 11, 12].indexOf(total) === -1) {
         newState = 'POINT';
         game.point = total;
+        speech += res.strings.ROLL_POINT_ESTABLISHED;
       }
     } else {
       // Transitions to nopoint if 7 or point was hit

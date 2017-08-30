@@ -25,7 +25,7 @@ function BuildEvent(argv)
   const cancel = {'name': 'AMAZON.CancelIntent', 'slots': {}};
   const highScore = {'name': 'HighScoreIntent', 'slots': {}};
   const repeat = {'name': 'AMAZON.RepeatIntent', 'slots': {}};
-
+  const remove = {'name': 'RemoveIntent', 'slots': {'Bet': {'name': 'Bet', 'value': ''}}};
   const lambda = {
     "session": {
       "sessionId": "SessionId.c88ec34d-28b0-46f6-a4c7-120d8fba8fa7",
@@ -131,8 +131,12 @@ function BuildEvent(argv)
     lambda.request.intent = yes;
   } else if (argv[2] == 'no') {
     lambda.request.intent = no;
-  }
-  else {
+  } else if (argv[2] == 'remove') {
+    lambda.request.intent = remove;
+    if (argv.length > 3) {
+      remove.slots.Bet.value = argv[3];
+    }
+  } else {
     console.log(argv[2] + ' was not valid');
     return null;
   }

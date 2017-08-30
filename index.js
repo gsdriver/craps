@@ -14,6 +14,7 @@ const Help = require('./intents/Help');
 const Exit = require('./intents/Exit');
 const Reset = require('./intents/Reset');
 const Repeat = require('./intents/Repeat');
+const Remove = require('./intents/Remove');
 const utils = require('./utils');
 const request = require('request');
 
@@ -50,6 +51,7 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'OddsBetIntent': Bet.handleIntent,
   'FieldBetIntent': Bet.handleIntent,
   'CrapsBetIntent': Bet.handleIntent,
+  'RemoveIntent': Remove.handleIntent,
   'RollIntent': Roll.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
@@ -76,6 +78,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   'OddsBetIntent': Bet.handleIntent,
   'FieldBetIntent': Bet.handleIntent,
   'CrapsBetIntent': Bet.handleIntent,
+  'RemoveIntent': Remove.handleIntent,
   'RollIntent': Roll.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
