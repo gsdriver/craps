@@ -18,6 +18,7 @@ const resources = {
   'BET_EXCEEDS_MAX': 'Sorry, this bet exceeds the maximum bet of ${0}.',
   'BET_EXCEEDS_BANKROLL': 'Sorry, this bet exceeds your bankroll of ${0}.',
   'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of ${1}.',
+  'BET_INVALID_HARDNUMBER': 'Sorry, {0} is not a valid hard way bet. ',
   'INVALID_BET_NO_POINT': 'Sorry, this bet can\'t be played until a point has been established.',
   'INVALID_BET_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
   'INVALID_BET_HAVE_LINEBET': 'Sorry, you already have a line bet in play.',
@@ -26,6 +27,7 @@ const resources = {
   'ODDS_BET_PLACED': '${0} odds placed.',
   'FIELD_BET_PLACED': '${0} field bet placed.',
   'CRAPS_BET_PLACED': '${0} craps bet placed.',
+  'HARDWAY_BET_PLACED': '${0} placed on hard {1}.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
   'BET_DUPLICATE_NOT_ADDED': 'You already placed ${0} on this bet, and another ${1} would exceed the maximum bet of ${2}. ',
   'BET_PLACED_REPROMPT': 'Place another bet or say roll to roll the dice.',
@@ -138,6 +140,16 @@ module.exports = {
       case 'CrapsBet':
         format = 'a ${0} craps bet';
         break;
+      case 'HardwayBet':
+        let hardNumber;
+        let roll;
+        for (roll in bet.winningRolls) {
+          if (roll) {
+            hardNumber = roll;
+          }
+        }
+        format = '${0} on hard ' + hardNumber;
+        break;
       default:
         format = '${0}';
         break;
@@ -147,7 +159,8 @@ module.exports = {
   },
   sayBetType: function(betType) {
     const bets = {PassBet: 'pass line bet', DontPassBet: 'don\'t pass line bet',
-      OddsBet: 'odds bet', FieldBet: 'field bet', CrapsBet: 'craps bet'};
+      OddsBet: 'odds bet', FieldBet: 'field bet', CrapsBet: 'craps bet',
+      HardwayBet: 'hard way bet'};
     return (bets[betType]) ? bets[betType] : betType;
   },
 };

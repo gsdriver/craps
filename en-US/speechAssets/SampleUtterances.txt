@@ -59,6 +59,25 @@ CrapsBetIntent craps for {Amount}
 CrapsBetIntent craps for {Amount} dollars
 CrapsBetIntent craps for {Amount} units
 
+HardwaysBetIntent bet on the hardways
+HardwaysBetIntent place a bet on the hardways
+HardwaysBetIntent bet {Amount} on the hardways
+HardwaysBetIntent bet {Amount} dollars on the hardways
+HardwaysBetIntent bet {Amount} units on the hardways
+HardwaysBetIntent hardways for {Amount} dollars
+HardwaysBetIntent hardways for {Amount} units
+HardwaysBetIntent {Amount} on the hardways
+
+HardBetIntent bet on hard {HardNumber}
+HardBetIntent hard {HardNumber}
+HardBetIntent bet {Amount} on hard {HardNumber}
+HardBetIntent bet {Amount} dollars on hard {HardNumber}
+HardBetIntent bet {Amount} units on hard {HardNumber}
+HardBetIntent hard {HardNumber}
+HardBetIntent hard {HardNumber} for {Amount}
+HardBetIntent hard {HardNumber} for {Amount} dollars
+HardBetIntent hard {HardNumber} for {Amount} units
+
 RemoveIntent remove my {Bet} bet
 RemoveIntent remove the {Bet} bet
 RemoveIntent remove my bet

@@ -13,12 +13,15 @@ module.exports = {
     let reprompt;
     let speechError;
     let speech;
+    let hardValue;
     let bet = {};
     const res = require('../' + this.event.request.locale + '/resources');
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
-      'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent'],
-      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent', 'CrapsBetIntent'],
+      'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
+          'HardBetIntent', 'HardwaysBetIntent'],
+      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
+          'HardBetIntent', 'HardwaysBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -40,6 +43,32 @@ module.exports = {
         && utils.getLineBet(game.bets)) {
       speechError = res.strings.INVALID_BET_HAVE_LINEBET;
       reprompt = res.strings.BET_INVALID_REPROMPT;
+    }
+
+    // Validation specific to certain bets
+    if (!speechError) {
+      switch (this.event.request.intent.name) {
+        case 'HardBetIntent':
+          // Need to have a HardNumber of 4, 6, 8, or 10
+          if (this.event.request.intent.slots.HardNumber
+            && this.event.request.intent.slots.HardNumber.value) {
+            hardValue = parseInt(this.event.request.intent.slots.HardNumber.value);
+            if ((hardValue !== 4) && (hardValue !== 6)
+              && (hardValue !== 8) && (hardValue !== 10)) {
+              // Invalid value
+              speechError = res.strings.BET_INVALID_HARDNUMBER
+                  .replace('{0}', this.event.request.intent.slots.HardNumber.value);
+              reprompt = res.strings.BET_INVALID_REPROMPT;
+            }
+          } else {
+            // Just make this a hardways bet
+//            this.event.request.intent.name = 'HardwaysBetIntent';
+            hardValue = 6;
+          }
+          break;
+        default:
+          break;
+      }
     }
 
     // Keep validating input if we don't have an error yet
@@ -107,6 +136,17 @@ module.exports = {
           bet.losingRolls = [4, 5, 6, 7, 8, 9, 10, 11];
           bet.singleRoll = true;
           speech = res.strings.CRAPS_BET_PLACED;
+          break;
+        case 'HardwaysBetIntent':
+          // We have to place four individual hardway bets!
+          break;
+        case 'HardBetIntent':
+          const payout = {4: 7, 6: 9, 8: 9, 10: 7};
+          bet.type = 'HardwayBet';
+          bet.winningRolls = {};
+          bet.winningRolls[hardValue] = payout[hardValue];
+          bet.losingRolls = [7, hardValue];
+          speech = res.strings.HARDWAY_BET_PLACED.replace('{1}', hardValue);
           break;
         default:
           // This shouldn't happen

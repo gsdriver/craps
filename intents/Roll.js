@@ -69,6 +69,18 @@ module.exports = {
     let won = 0;
     let lost = 0;
     game.bets.forEach((bet) => {
+      // Wait- hardway bet is special!
+      if (bet.type === 'HardwayBet') {
+        // If this is an easy roll and the dice don't match
+        // then remove this value from the winningRoll array
+        if (!(total % 2) && (game.dice[0] !== game.dice[1])) {
+          if (bet.winningRolls[total]) {
+            // Nope, you're going to lose
+            bet.winningRolls[total] = undefined;
+          }
+        }
+      }
+
       if (bet.winningRolls[total]) {
         won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
       } else if (bet.losingRolls.indexOf(total) !== -1) {

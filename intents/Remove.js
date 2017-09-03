@@ -25,7 +25,8 @@ module.exports = {
         && this.event.request.intent.slots.Bet.value) {
         const betMapping = {'field': 'FieldBet', 'craps': 'CrapsBet',
           'pass': 'PassBet', 'don\'t pass': 'DontPassBet',
-          'odds': 'OddsBet'};
+          'odds': 'OddsBet',
+          'hard': 'HardwayBet', 'hardway': 'HardwayBet', 'hard way': 'HardwayBet'};
         const bet = this.event.request.intent.slots.Bet.value.toLowerCase();
 
         if (betMapping[bet]) {
@@ -63,6 +64,7 @@ module.exports = {
           speech = res.strings.REMOVE_CANTREMOVE_PASSBET;
         } else {
           speech = res.strings.REMOVE_BET.replace('{0}', res.sayBet(game.bets[removeBet]));
+          game.bankroll += game.bets[removeBet].amount;
           game.bets.splice(removeBet, 1);
           if (game.bets.length === 0) {
             game.bets = undefined;
@@ -72,6 +74,6 @@ module.exports = {
     }
 
     speech += reprompt;
-    utils.emitResponse(this.emit, this.event.request.locale, null, speech, reprompt);
+    utils.emitResponse(this.emit, this.event.request.locale, null, null, speech, reprompt);
   },
 };

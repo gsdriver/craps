@@ -46,6 +46,28 @@
       ]
     },
     {
+      "intent": "HardwaysBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
+      "intent": "HardBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        },
+        {
+          "name": "HardNumber",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "RemoveIntent",
       "slots": [
         {
