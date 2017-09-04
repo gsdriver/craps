@@ -28,7 +28,9 @@ module.exports = {
           'odds': 'OddsBet',
           'hard': 'HardwayBet|HardwaysBet', 'hardway': 'HardwayBet|HardwaysBet',
           'hard way': 'HardwayBet|HardwaysBet',
-          'yo': 'YoBet', 'yo eleven': 'YoBet', 'eleven': 'YoBet', '11': 'YoBet'};
+          'yo': 'YoBet', 'yo eleven': 'YoBet', 'eleven': 'YoBet', '11': 'YoBet',
+          'horn': 'HornBet', 'seven': 'SevenBet', 'big red': 'SevenBet',
+          'come': 'ComeBet', 'don\'t come': 'DontComeBet'};
         const bet = this.event.request.intent.slots.Bet.value.toLowerCase();
 
         if (betMapping[bet]) {
@@ -64,6 +66,9 @@ module.exports = {
           ((game.bets[removeBet].type === 'PassBet') ||
            (game.bets[removeBet].type === 'DontPassBet'))) {
           speech = res.strings.REMOVE_CANTREMOVE_PASSBET;
+        } else if (game.bets[removeBet].state === 'POINT') {
+          // Can't remove a come bet
+          speech = res.strings.REMOVE_CANTREMOVE_COMEBET;
         } else {
           speech = res.strings.REMOVE_BET.replace('{0}', res.sayBet(game.bets[removeBet]));
           game.bankroll += game.bets[removeBet].amount;

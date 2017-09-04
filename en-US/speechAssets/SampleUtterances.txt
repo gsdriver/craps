@@ -92,6 +92,53 @@ CrapsBetIntent {Amount} on craps
 CrapsBetIntent {Amount} dollars on craps
 CrapsBetIntent {Amount} units on craps
 
+ComeBetIntent place a come bet
+ComeBetIntent place a come bet for {Amount}
+ComeBetIntent place a come bet for {Amount} dollars
+ComeBetIntent place a come bet for {Amount} units
+ComeBetIntent come bet for {Amount}
+ComeBetIntent come bet for {Amount} dollars
+ComeBetIntent come bet for {Amount} units
+ComeBetIntent {Amount} on come
+ComeBetIntent {Amount} dollars on come
+ComeBetIntent {Amount} units on come
+
+DontComeBetIntent place a don't come bet
+DontComeBetIntent place a don't come bet for {Amount}
+DontComeBetIntent place a don't come bet for {Amount} dollars
+DontComeBetIntent place a don't come bet for {Amount} units
+DontComeBetIntent don't come bet for {Amount}
+DontComeBetIntent don't come bet for {Amount} dollars
+DontComeBetIntent don't come bet for {Amount} units
+DontComeBetIntent {Amount} on don't come
+DontComeBetIntent {Amount} dollars on don't come
+DontComeBetIntent {Amount} units on don't come
+
+HornBetIntent place a horn bet
+HornBetIntent place a horn bet for {Amount}
+HornBetIntent place a horn bet for {Amount} dollars
+HornBetIntent place a horn bet for {Amount} units
+HornBetIntent horn for {Amount}
+HornBetIntent horn for {Amount} dollars
+HornBetIntent horn for {Amount} units
+HornBetIntent {Amount} on the horn
+HornBetIntent {Amount} dollars on the horn
+HornBetIntent {Amount} units on the horn
+
+SevenBetIntent bet on seven
+SevenBetIntent bet on seven for {Amount}
+SevenBetIntent bet on seven for {Amount} dollars
+SevenBetIntent bet on seven for {Amount} units
+SevenBetIntent big red for {Amount}
+SevenBetIntent big red for {Amount} dollars
+SevenBetIntent big red for {Amount} units
+SevenBetIntent {Amount} on seven
+SevenBetIntent {Amount} dollars on seven
+SevenBetIntent {Amount} units on seven
+SevenBetIntent {Amount} on big red
+SevenBetIntent {Amount} dollars on big red
+SevenBetIntent {Amount} units on big red
+
 YoBetIntent place a yo bet
 YoBetIntent place a yo bet for {Amount}
 YoBetIntent place a yo bet for {Amount} dollars

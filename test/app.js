@@ -12,9 +12,13 @@ function BuildEvent(argv)
   // Templates that can fill in the intent
   const bet = {'name': 'PassBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const dontpassbet = {'name': 'DontPassBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const comebet = {'name': 'ComeBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const dontcomebet = {'name': 'DontComeBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const fieldbet = {'name': 'FieldBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const crapsbet = {'name': 'CrapsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const hornbet = {'name': 'HornBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const sevenbet = {'name': 'SevenBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const yobet = {'name': 'YoBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const hardwaysbet = {'name': 'HardwaysBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const hardbet = {'name': 'HardBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''},
@@ -98,6 +102,16 @@ function BuildEvent(argv)
     if (argv.length > 3) {
       dontpassbet.slots.Amount.value = argv[3];
     }
+  } else if (argv[2] == 'comebet') {
+    lambda.request.intent = comebet;
+    if (argv.length > 3) {
+      comebet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'dontcomebet') {
+    lambda.request.intent = dontcomebet;
+    if (argv.length > 3) {
+      dontcomebet.slots.Amount.value = argv[3];
+    }
   } else if (argv[2] == 'oddsbet') {
     lambda.request.intent = oddsbet;
     if (argv.length > 3) {
@@ -112,6 +126,16 @@ function BuildEvent(argv)
     lambda.request.intent = crapsbet;
     if (argv.length > 3) {
       crapsbet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'hornbet') {
+    lambda.request.intent = hornbet;
+    if (argv.length > 3) {
+      hornbet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'sevenbet') {
+    lambda.request.intent = sevenbet;
+    if (argv.length > 3) {
+      sevenbet.slots.Amount.value = argv[3];
     }
   } else if (argv[2] == 'yobet') {
     lambda.request.intent = yobet;

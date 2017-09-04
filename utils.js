@@ -186,7 +186,7 @@ function getTopScoresFromS3(attributes, callback) {
 
         // If their current high score isn't in the list, add it
         if (bankroll.indexOf(myScore) < 0) {
-          scores.push({name: attributes.firstName, bankroll: myScore});
+          scores[attributes.currentGame].push({name: attributes.firstName, bankroll: myScore});
         }
 
         callback(null, scores[attributes.currentGame].sort((a, b) => (b.bankroll - a.bankroll)));

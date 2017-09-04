@@ -19,9 +19,10 @@ module.exports = {
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
       'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
-          'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent'],
+          'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent', 'HornBetIntent',
+          'SevenBetIntent', 'ComeBetIntent', 'DontComeBetIntent'],
       'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent',
-          'CrapsBetIntent', 'YoBetIntent'],
+          'CrapsBetIntent', 'YoBetIntent', 'HornBetIntent', 'SevenBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -111,6 +112,18 @@ module.exports = {
           bet = utils.createLineBet(bet.amount, game.passPlayer);
           speech = res.strings.PASSBET_PLACED;
           break;
+        case 'ComeBetIntent':
+          bet = utils.createLineBet(bet.amount, true);
+          bet.type = 'ComeBet';
+          speech = res.strings.COME_BET_PLACED;
+          bet.state = 'NOPOINT';
+          break;
+        case 'DontComeBetIntent':
+          bet = utils.createLineBet(bet.amount, false);
+          bet.type = 'DontComeBet';
+          speech = res.strings.DONTCOME_BET_PLACED;
+          bet.state = 'NOPOINT';
+          break;
         case 'OddsBetIntent':
           bet.type = 'OddsBet';
           speech = res.strings.ODDS_BET_PLACED;
@@ -143,6 +156,18 @@ module.exports = {
           bet.losingRolls = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
           speech = res.strings.YO_BET_PLACED;
           break;
+        case 'HornBetIntent':
+          bet.type = 'HornBet';
+          bet.winningRolls = {2: 6.75, 3: 3, 11: 3, 12: 6.75};
+          bet.losingRolls = [4, 5, 6, 7, 8, 9, 10];
+          speech = res.strings.HORN_BET_PLACED;
+          break;
+        case 'SevenBetIntent':
+          bet.type = 'SevenBet';
+          bet.winningRolls = {7: 4};
+          bet.losingRolls = [2, 3, 4, 5, 6, 8, 9, 10, 11, 12];
+          speech = res.strings.SEVEN_BET_PLACED;
+          break;
         case 'HardwaysBetIntent':
           bet.type = 'HardwaysBet';
           bet.winningRolls = {4: 7, 6: 9, 8: 9, 10: 7};
@@ -165,10 +190,11 @@ module.exports = {
 
       // Check if they already have an identical bet and if so
       // we'll add to that bet (so long as it doesn't exceed the
-      // hand maximum)
+      // hand maximum).  Come bets are an exception
       let duplicateBet;
       let duplicateText;
-      if (game.bets) {
+      if (game.bets &&
+          ((bet.type !== 'ComeBet') || (bet.type === 'DontComeBet'))) {
         let i;
 
         for (i = 0; i < game.bets.length; i++) {

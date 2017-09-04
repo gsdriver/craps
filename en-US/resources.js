@@ -28,6 +28,10 @@ const resources = {
   'FIELD_BET_PLACED': '${0} field bet placed.',
   'CRAPS_BET_PLACED': '${0} craps bet placed.',
   'YO_BET_PLACED': '${0} bet on yo eleven.',
+  'HORN_BET_PLACED': '${0} horn bet placed.',
+  'SEVEN_BET_PLACED': '${0} bet on seven.',
+  'COME_BET_PLACED': '${0} come bet placed.',
+  'DONTCOME_BET_PLACED': '${0} don\'t come bet placed.',
   'HARDWAY_BET_PLACED': '${0} placed on hard {1}.',
   'HARDWAYS_BET_PLACED': '${0} divided among the hard way bets.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
@@ -48,6 +52,7 @@ const resources = {
   'REMOVE_BETNOTPLACED': 'You haven\'t placed a {0}. ',
   'REMOVE_UNKNOWN_BETTYPE': 'Sorry, I don\'t know what a {0} bet is. ',
   'REMOVE_CANTREMOVE_PASSBET': 'Sorry, you can\'t remove a line bet once a point has been established. ',
+  'REMOVE_CANTREMOVE_COMEBET': 'Sorry, you can\'t remove a come bet once a point for that roll has been established. ',
   'REMOVE_BET': 'Removing your bet of {0}. ',
   // From Repeat.js
   'READ_REPROMPT': 'What else can I help you with?',
@@ -148,6 +153,26 @@ module.exports = {
       case 'HardwaysBet':
         format = '${0} divided among the hard ways';
         break;
+      case 'HornBet':
+        format = '${0} horn bet';
+        break;
+      case 'SevenBet':
+        format = '${0} on seven';
+        break;
+      case 'ComeBet':
+        if (bet.point) {
+          format = '${0} come bet with a point of ' + bet.point;
+        } else {
+          format = '${0} come bet';
+        }
+        break;
+      case 'DontComeBet':
+        if (bet.point) {
+          format = '${0} don\'t come bet with a point of ' + bet.point;
+        } else {
+          format = '${0} don\'t come bet';
+        }
+        break;
       case 'HardwayBet':
         let hardNumber;
         let roll;
@@ -168,7 +193,9 @@ module.exports = {
   sayBetType: function(betType) {
     const bets = {PassBet: 'pass line bet', DontPassBet: 'don\'t pass line bet',
       OddsBet: 'odds bet', FieldBet: 'field bet', CrapsBet: 'craps bet',
-      HardwayBet: 'hard way bet', HardwaysBet: 'on the hard ways', YoBet: 'yo eleven bet'};
+      HardwayBet: 'hard way bet', HardwaysBet: 'on the hard ways', YoBet: 'yo eleven bet',
+      HornBet: 'horn bet', SevenBet: 'on seven', ComeBet: 'come bet',
+      DontComeBet: 'don\'t come bet'};
     return (bets[betType]) ? bets[betType] : betType;
   },
 };

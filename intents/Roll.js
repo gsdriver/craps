@@ -64,6 +64,7 @@ module.exports = {
 
     // Figure out payouts
     let won = 0;
+    let winningBets = 0;
     let lost = 0;
     game.bets.forEach((bet) => {
       // Wait- hardway bet is special!
@@ -93,7 +94,8 @@ module.exports = {
         let removeRoll;
 
         if (bet.winningRolls[total]) {
-          won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
+          won += Math.floor(bet.amount * bet.winningRolls[total]);
+          winningBets += bet.amount;
           removeRoll = true;
         } else if (bet.losingRolls.indexOf(total) !== -1) {
           if (total === 7) {
@@ -116,7 +118,8 @@ module.exports = {
         }
       } else {
         if (bet.winningRolls[total]) {
-          won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
+          won += Math.floor(bet.amount * bet.winningRolls[total]);
+          winningBets += bet.amount;
           bet.remove = true;
         } else if (bet.losingRolls.indexOf(total) !== -1) {
           lost += bet.amount;
@@ -147,6 +150,31 @@ module.exports = {
         }
         reprompt = res.strings.ROLL_COME_REPROMPT;
       }
+    }
+
+    // Any come bets need to be transitioned separately
+    if (game.bets) {
+      game.bets.forEach((bet) => {
+        if (bet.state === 'NOPOINT') {
+          if ([2, 3, 7, 11, 12].indexOf(total) === -1) {
+            bet.state = 'POINT';
+            bet.point = total;
+            if (bet.type === 'ComeBet') {
+              bet.winningRolls = {};
+              bet.winningRolls[bet.point] = 1;
+              bet.losingRolls = [7];
+            } else if (bet.type === 'DontComeBet') {
+              bet.winningRolls = {7: 1};
+              bet.losingRolls = [bet.point];
+            }
+          }
+        } else if (bet.state === 'POINT') {
+          if ((total === 7) || (total === bet.point)) {
+            bet.state = 'NOPOINT';
+            bet.point = undefined;
+          }
+        }
+      });
     }
 
     // Go through and update bets (remove one-time bets
@@ -189,7 +217,7 @@ module.exports = {
 
     // OK, let's see if they are out of money
     // Remember we already deducted bets from their bankroll (for a loss)
-    game.bankroll += won;
+    game.bankroll += (won + winningBets);
     this.handler.state = newState;
 
     // If they have no units left, reset the bankroll
