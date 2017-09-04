@@ -26,23 +26,24 @@ module.exports = {
         const betMapping = {'field': 'FieldBet', 'craps': 'CrapsBet',
           'pass': 'PassBet', 'don\'t pass': 'DontPassBet',
           'odds': 'OddsBet',
-          'hard': 'HardwayBet', 'hardway': 'HardwayBet', 'hard way': 'HardwayBet',
+          'hard': 'HardwayBet|HardwaysBet', 'hardway': 'HardwayBet|HardwaysBet',
+          'hard way': 'HardwayBet|HardwaysBet',
           'yo': 'YoBet', 'yo eleven': 'YoBet', 'eleven': 'YoBet', '11': 'YoBet'};
         const bet = this.event.request.intent.slots.Bet.value.toLowerCase();
 
         if (betMapping[bet]) {
           let i;
-          const betType = betMapping[bet];
+          const betType = betMapping[bet].split('|');
 
           for (i = 0; i < game.bets.length; i++) {
-            if (game.bets[i].type === betType) {
+            if (betType.indexOf(game.bets[i].type) !== -1) {
               removeBet = i;
               break;
             }
           }
 
           if (removeBet === undefined) {
-            speech = res.strings.REMOVE_BETNOTPLACED.replace('{0}', res.sayBetType(betType));
+            speech = res.strings.REMOVE_BETNOTPLACED.replace('{0}', res.sayBetType(betType[0]));
           }
         } else if (bet === 'last') {
           removeBet = game.bets.length - 1;

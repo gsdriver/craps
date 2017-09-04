@@ -67,8 +67,8 @@ module.exports = {
     let lost = 0;
     game.bets.forEach((bet) => {
       // Wait- hardway bet is special!
-      if (bet.type === 'HardwayBet') {
-        // If this is an easy roll and the dice don't match
+      if ((bet.type === 'HardwayBet') || (bet.type === 'HardwaysBet')) {
+        // If this is an easy roll where the dice don't match
         // then remove this value from the winningRoll array
         if (!(total % 2) && (game.dice[0] !== game.dice[1])) {
           if (bet.winningRolls[total]) {
@@ -76,14 +76,52 @@ module.exports = {
             bet.winningRolls[total] = undefined;
           }
         }
+
+        // If this is the point mark this bet for removal
+        // But don't forget to add back their bets!
+        if (total === game.point) {
+          const rollsDown = (bet.winningRolls[total]) ?
+              game.losingRolls.length - 2 :
+              game.losingRolls.length - 1;
+          game.bankroll += (rollsDown * bet.amount) / 4;
+          bet.remove = true;
+        }
       }
 
-      if (bet.winningRolls[total]) {
-        won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
-        bet.remove = true;
-      } else if (bet.losingRolls.indexOf(total) !== -1) {
-        lost += bet.amount;
-        bet.remove = true;
+      // Hardways is a special case because it's actually four bets in one
+      if (bet.type === 'HardwaysBet') {
+        let removeRoll;
+
+        if (bet.winningRolls[total]) {
+          won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
+          removeRoll = true;
+        } else if (bet.losingRolls.indexOf(total) !== -1) {
+          if (total === 7) {
+            lost += (bet.losingRolls.length - 1) * bet.amount / 4;
+            bet.remove = true;
+          } else {
+            lost += bet.amount / 4;
+            removeRoll = true;
+          }
+        }
+
+        if (removeRoll) {
+          const i = bet.losingRolls.indexOf(total);
+          bet.losingRolls.splice(i, 1);
+          if (bet.losingRolls.length === 1) {
+            // You've lost all hardway bets, so just remove it
+            bet.remove = true;
+          }
+          bet.winningRolls[total] = undefined;
+        }
+      } else {
+        if (bet.winningRolls[total]) {
+          won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
+          bet.remove = true;
+        } else if (bet.losingRolls.indexOf(total) !== -1) {
+          lost += bet.amount;
+          bet.remove = true;
+        }
       }
     });
 

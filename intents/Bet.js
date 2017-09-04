@@ -20,8 +20,8 @@ module.exports = {
     const validBets = {
       'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
           'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent'],
-      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
-          'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent'],
+      'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent',
+          'CrapsBetIntent', 'YoBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -62,8 +62,7 @@ module.exports = {
             }
           } else {
             // Just make this a hardways bet
-//            this.event.request.intent.name = 'HardwaysBetIntent';
-            hardValue = 6;
+            this.event.request.intent.name = 'HardwaysBetIntent';
           }
           break;
         default:
@@ -90,6 +89,9 @@ module.exports = {
         reprompt = res.strings.BET_INVALID_REPROMPT;
       } else {
         // Place the bet
+        if (this.event.request.intent.name === 'HardwaysBetIntent') {
+          bet.amount = bet.amount - (bet.amount % 4);
+        }
         game.bankroll -= bet.amount;
       }
     }
@@ -142,7 +144,10 @@ module.exports = {
           speech = res.strings.YO_BET_PLACED;
           break;
         case 'HardwaysBetIntent':
-          // We have to place four individual hardway bets!
+          bet.type = 'HardwaysBet';
+          bet.winningRolls = {4: 7, 6: 9, 8: 9, 10: 7};
+          bet.losingRolls = [4, 6, 8, 10, 7];
+          speech = res.strings.HARDWAYS_BET_PLACED;
           break;
         case 'HardBetIntent':
           const payout = {4: 7, 6: 9, 8: 9, 10: 7};
