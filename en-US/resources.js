@@ -27,6 +27,7 @@ const resources = {
   'ODDS_BET_PLACED': '${0} odds placed.',
   'FIELD_BET_PLACED': '${0} field bet placed.',
   'CRAPS_BET_PLACED': '${0} craps bet placed.',
+  'YO_BET_PLACED': '${0} bet on yo eleven.',
   'HARDWAY_BET_PLACED': '${0} placed on hard {1}.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
   'BET_DUPLICATE_NOT_ADDED': 'You already placed ${0} on this bet, and another ${1} would exceed the maximum bet of ${2}. ',
@@ -140,6 +141,9 @@ module.exports = {
       case 'CrapsBet':
         format = 'a ${0} craps bet';
         break;
+      case 'YoBet':
+        format = 'a ${0} yo eleven bet';
+        break;
       case 'HardwayBet':
         let hardNumber;
         let roll;
@@ -160,7 +164,7 @@ module.exports = {
   sayBetType: function(betType) {
     const bets = {PassBet: 'pass line bet', DontPassBet: 'don\'t pass line bet',
       OddsBet: 'odds bet', FieldBet: 'field bet', CrapsBet: 'craps bet',
-      HardwayBet: 'hard way bet'};
+      HardwayBet: 'hard way bet', YoBet: 'yo eleven bet'};
     return (bets[betType]) ? bets[betType] : betType;
   },
 };

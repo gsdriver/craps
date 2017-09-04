@@ -15,6 +15,7 @@ function BuildEvent(argv)
   const oddsbet = {'name': 'OddsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const fieldbet = {'name': 'FieldBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const crapsbet = {'name': 'CrapsBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
+  const yobet = {'name': 'YoBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const hardwaysbet = {'name': 'HardwaysBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const hardbet = {'name': 'HardBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''},
         'HardNumber': {'name': 'HardNumber', 'value': ''}}};
@@ -111,6 +112,11 @@ function BuildEvent(argv)
     lambda.request.intent = crapsbet;
     if (argv.length > 3) {
       crapsbet.slots.Amount.value = argv[3];
+    }
+  } else if (argv[2] == 'yobet') {
+    lambda.request.intent = yobet;
+    if (argv.length > 3) {
+      yobet.slots.Amount.value = argv[3];
     }
   } else if (argv[2] == 'hardwaysbet') {
     lambda.request.intent = hardwaysbet;

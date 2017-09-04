@@ -14,6 +14,15 @@ PassBetIntent place a pass bet for {Amount} units
 PassBetIntent place a pass line bet for {Amount}
 PassBetIntent place a pass line bet for {Amount} dollars
 PassBetIntent place a pass line bet for {Amount} units
+PassBetIntent bet {Amount} on the pass line
+PassBetIntent bet {Amount} dollars on the pass line
+PassBetIntent bet {Amount} units on the pass line
+PassBetIntent {Amount} on the pass line
+PassBetIntent {Amount} dollars on the pass line
+PassBetIntent {Amount} units on the pass line
+PassBetIntent put {Amount} on the pass line
+PassBetIntent put {Amount} dollars on the pass line
+PassBetIntent put {Amount} units on the pass line
 
 DontPassBetIntent place a don't pass bet
 DontPassBetIntent place a don't pass line bet
@@ -29,6 +38,24 @@ DontPassBetIntent place a don't pass bet for {Amount} units
 DontPassBetIntent place a don't pass line bet for {Amount}
 DontPassBetIntent place a don't pass line bet for {Amount} dollars
 DontPassBetIntent place a don't pass line bet for {Amount} units
+DontPassBetIntent bet {Amount} on the don't pass line
+DontPassBetIntent bet {Amount} dollars on the don't pass line
+DontPassBetIntent bet {Amount} units on the don't pass line
+DontPassBetIntent {Amount} on the don't pass line
+DontPassBetIntent {Amount} dollars on the don't pass line
+DontPassBetIntent {Amount} units on the don't pass line
+DontPassBetIntent put {Amount} on the don't pass line
+DontPassBetIntent put {Amount} dollars on the don't pass line
+DontPassBetIntent put {Amount} units on the don't pass line
+DontPassBetIntent bet {Amount} on don't pass
+DontPassBetIntent bet {Amount} dollars on don't pass
+DontPassBetIntent bet {Amount} units on don't pass
+DontPassBetIntent {Amount} on don't pass
+DontPassBetIntent {Amount} dollars on don't pass
+DontPassBetIntent {Amount} units on don't pass
+DontPassBetIntent put {Amount} on don't pass
+DontPassBetIntent put {Amount} dollars on don't pass
+DontPassBetIntent put {Amount} units on don't pass
 
 OddsBetIntent place odds
 OddsBetIntent place an odds bet
@@ -50,6 +77,9 @@ FieldBetIntent play the field for {Amount} units
 FieldBetIntent field for {Amount}
 FieldBetIntent field for {Amount} dollars
 FieldBetIntent field for {Amount} units
+FieldBetIntent {Amount} on the field
+FieldBetIntent {Amount} dollars on the field
+FieldBetIntent {Amount} units on the field
 
 CrapsBetIntent place a craps bet
 CrapsBetIntent place a craps bet for {Amount}
@@ -58,6 +88,40 @@ CrapsBetIntent place a craps bet for {Amount} units
 CrapsBetIntent craps for {Amount}
 CrapsBetIntent craps for {Amount} dollars
 CrapsBetIntent craps for {Amount} units
+CrapsBetIntent {Amount} on craps
+CrapsBetIntent {Amount} dollars on craps
+CrapsBetIntent {Amount} units on craps
+
+YoBetIntent place a yo bet
+YoBetIntent place a yo bet for {Amount}
+YoBetIntent place a yo bet for {Amount} dollars
+YoBetIntent place a yo bet for {Amount} units
+YoBetIntent yo for {Amount}
+YoBetIntent yo for {Amount} dollars
+YoBetIntent yo for {Amount} units
+YoBetIntent {Amount} on yo
+YoBetIntent {Amount} dollars on yo
+YoBetIntent {Amount} units on yo
+YoBetIntent place a yo eleven bet
+YoBetIntent place a yo eleven bet for {Amount}
+YoBetIntent place a yo eleven bet for {Amount} dollars
+YoBetIntent place a yo eleven bet for {Amount} units
+YoBetIntent yo eleven for {Amount}
+YoBetIntent yo eleven for {Amount} dollars
+YoBetIntent yo eleven for {Amount} units
+YoBetIntent {Amount} on eleven
+YoBetIntent {Amount} dollars on eleven
+YoBetIntent {Amount} units on eleven
+YoBetIntent place a eleven bet
+YoBetIntent place a eleven bet for {Amount}
+YoBetIntent place a eleven bet for {Amount} dollars
+YoBetIntent place a eleven bet for {Amount} units
+YoBetIntent eleven for {Amount}
+YoBetIntent eleven for {Amount} dollars
+YoBetIntent eleven for {Amount} units
+YoBetIntent {Amount} on eleven
+YoBetIntent {Amount} dollars on eleven
+YoBetIntent {Amount} units on eleven
 
 HardwaysBetIntent bet on the hardways
 HardwaysBetIntent place a bet on the hardways
@@ -67,6 +131,8 @@ HardwaysBetIntent bet {Amount} units on the hardways
 HardwaysBetIntent hardways for {Amount} dollars
 HardwaysBetIntent hardways for {Amount} units
 HardwaysBetIntent {Amount} on the hardways
+HardwaysBetIntent {Amount} dollars on the hardways
+HardwaysBetIntent {Amount} units on the hardways
 
 HardBetIntent bet on hard {HardNumber}
 HardBetIntent hard {HardNumber}
@@ -77,6 +143,15 @@ HardBetIntent hard {HardNumber}
 HardBetIntent hard {HardNumber} for {Amount}
 HardBetIntent hard {HardNumber} for {Amount} dollars
 HardBetIntent hard {HardNumber} for {Amount} units
+HardBetIntent {Amount} on hard {HardNumber}
+HardBetIntent {Amount} dollars on hard {HardNumber}
+HardBetIntent {Amount} units on hard {HardNumber}
+HardBetIntent put {Amount} on hard {HardNumber}
+HardBetIntent put {Amount} dollars on hard {HardNumber}
+HardBetIntent put {Amount} units on hard {HardNumber}
+HardBetIntent bet {Amount} on hard {HardNumber}
+HardBetIntent bet {Amount} dollars on hard {HardNumber}
+HardBetIntent bet {Amount} units on hard {HardNumber}
 
 RemoveIntent remove my {Bet} bet
 RemoveIntent remove the {Bet} bet

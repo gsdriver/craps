@@ -19,9 +19,9 @@ module.exports = {
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
       'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
-          'HardBetIntent', 'HardwaysBetIntent'],
+          'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent'],
       'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
-          'HardBetIntent', 'HardwaysBetIntent'],
+          'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent'],
     };
 
     // Make sure this is a valid bet for the state
@@ -127,15 +127,19 @@ module.exports = {
           bet.type = 'FieldBet';
           bet.winningRolls = {2: 2, 3: 1, 4: 1, 9: 1, 10: 1, 11: 1, 12: 3};
           bet.losingRolls = [5, 6, 7, 8];
-          bet.singleRoll = true;
           speech = res.strings.FIELD_BET_PLACED;
           break;
         case 'CrapsBetIntent':
           bet.type = 'CrapsBet';
           bet.winningRolls = {2: 7, 3: 7, 12: 7};
           bet.losingRolls = [4, 5, 6, 7, 8, 9, 10, 11];
-          bet.singleRoll = true;
           speech = res.strings.CRAPS_BET_PLACED;
+          break;
+        case 'YoBetIntent':
+          bet.type = 'YoBet';
+          bet.winningRolls = {11: 15};
+          bet.losingRolls = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
+          speech = res.strings.YO_BET_PLACED;
           break;
         case 'HardwaysBetIntent':
           // We have to place four individual hardway bets!

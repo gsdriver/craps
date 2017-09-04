@@ -49,12 +49,9 @@ module.exports = {
 
     // Let's see if the dice fell off the table
     let offTable;
-    if (game.rolls === 4) {
-      // Fourth roll falls off table
-      offTable = true;
-    } else if (game.rolls > 4) {
-      // 5% chance
-      if (Math.floor(Math.random() * 20) === 1) {
+    if (game.rolls >= 4) {
+      // Roll can be off table starting with fourth roll
+      if (Math.floor(Math.random() * Math.sqrt(9 * (game.rolls - 4) + 1)) === 0) {
         offTable = true;
       }
     }
@@ -83,8 +80,10 @@ module.exports = {
 
       if (bet.winningRolls[total]) {
         won += Math.floor(bet.amount * (1 + bet.winningRolls[total]));
+        bet.remove = true;
       } else if (bet.losingRolls.indexOf(total) !== -1) {
         lost += bet.amount;
+        bet.remove = true;
       }
     });
 
@@ -102,21 +101,20 @@ module.exports = {
       if ((total === 7) || (total === game.point)) {
         newState = 'NOPOINT';
         game.point = undefined;
-        game.bets = undefined;
         game.rounds++;
         if (total === 7) {
           speech += res.strings.ROLL_SEVEN_CRAPS;
-          reprompt = res.strings.ROLL_COME_REPROMPT;
         } else {
           speech += res.strings.ROLL_GOT_POINT;
         }
+        reprompt = res.strings.ROLL_COME_REPROMPT;
       }
     }
 
     // Go through and update bets (remove one-time bets
     // or change winning numbers for the line bet)
     if (game.bets) {
-      const newbets = [];
+      let newbets;
       game.bets.forEach((bet) => {
         if (bet.type === 'PassBet') {
           if ((this.handler.state === 'NOPOINT')
@@ -133,7 +131,10 @@ module.exports = {
             bet.losingRolls = [game.point];
           }
         }
-        if (!bet.singleRoll) {
+        if (!bet.remove) {
+          if (!newbets) {
+            newbets = [];
+          }
           newbets.push(bet);
         }
       });

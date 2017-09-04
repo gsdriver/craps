@@ -46,6 +46,15 @@
       ]
     },
     {
+      "intent": "YoBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "HardwaysBetIntent",
       "slots": [
         {

@@ -26,7 +26,8 @@ module.exports = {
         const betMapping = {'field': 'FieldBet', 'craps': 'CrapsBet',
           'pass': 'PassBet', 'don\'t pass': 'DontPassBet',
           'odds': 'OddsBet',
-          'hard': 'HardwayBet', 'hardway': 'HardwayBet', 'hard way': 'HardwayBet'};
+          'hard': 'HardwayBet', 'hardway': 'HardwayBet', 'hard way': 'HardwayBet',
+          'yo': 'YoBet', 'yo eleven': 'YoBet', 'eleven': 'YoBet', '11': 'YoBet'};
         const bet = this.event.request.intent.slots.Bet.value.toLowerCase();
 
         if (betMapping[bet]) {
