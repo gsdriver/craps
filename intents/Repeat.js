@@ -22,9 +22,14 @@ module.exports = {
       const betNames = [];
 
       game.bets.forEach((bet) => {
-        betNames.push(res.sayBet(bet));
+        if (!bet.notWorking) {
+          betNames.push(res.sayBet(bet));
+        }
       });
-      speech += res.strings.READ_BETS.replace('{0}', speechUtils.and(betNames));
+
+      if (betNames.length) {
+        speech += res.strings.READ_BETS.replace('{0}', speechUtils.and(betNames));
+      }
     }
 
     speech += reprompt;

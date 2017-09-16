@@ -18,6 +18,7 @@ module.exports = {
       speech = res.strings.REMOVE_NOBETS;
     } else {
       let removeBet;
+      let oddsBet;
 
       // Which bet do they want to remove?
       if (this.event.request.intent.slots
@@ -30,21 +31,33 @@ module.exports = {
           'hard way': 'HardwayBet|HardwaysBet',
           'yo': 'YoBet', 'yo eleven': 'YoBet', 'eleven': 'YoBet', '11': 'YoBet',
           'horn': 'HornBet', 'seven': 'SevenBet', 'big red': 'SevenBet',
-          'come': 'ComeBet', 'don\'t come': 'DontComeBet'};
+          'come': 'ComeBet', 'don\'t come': 'DontComeBet',
+          'place': 'PlaceBet', 'place bet': 'PlaceBet'};
         const bet = this.event.request.intent.slots.Bet.value.toLowerCase();
 
         if (betMapping[bet]) {
           let i;
           const betType = betMapping[bet].split('|');
 
-          for (i = 0; i < game.bets.length; i++) {
-            if (betType.indexOf(game.bets[i].type) !== -1) {
-              removeBet = i;
-              break;
+          // Odds bet is a special case
+          if (betType[0] === 'OddsBet') {
+            // Go backwards and find a bet with odds
+            for (i = game.bets.length - 1; i >= 0; i--) {
+              if (game.bets[i].odds) {
+                oddsBet = i;
+                break;
+              }
+            }
+          } else {
+            for (i = 0; i < game.bets.length; i++) {
+              if (betType.indexOf(game.bets[i].type) !== -1) {
+                removeBet = i;
+                break;
+              }
             }
           }
 
-          if (removeBet === undefined) {
+          if ((removeBet === undefined) && (oddsBet === undefined)) {
             speech = res.strings.REMOVE_BETNOTPLACED.replace('{0}', res.sayBetType(betType[0]));
           }
         } else if (bet === 'last') {
@@ -61,10 +74,15 @@ module.exports = {
 
       // Did we find a bet?
       if (!speech) {
-        // Can't remove line bets after point
-        if ((this.handler.state === 'POINT') &&
+        if (oddsBet !== undefined) {
+          game.bankroll += game.bets[oddsBet].odds;
+          game.bets[oddsBet].odds = undefined;
+          game.bets[oddsBet].oddsPayout = undefined;
+          speech = res.strings.REMOVE_ODDS.replace('{0}', res.sayBetType(game.bets[oddsBet].type));
+        } else if ((this.handler.state === 'POINT') &&
           ((game.bets[removeBet].type === 'PassBet') ||
            (game.bets[removeBet].type === 'DontPassBet'))) {
+          // Can't remove line bets after point
           speech = res.strings.REMOVE_CANTREMOVE_PASSBET;
         } else if (game.bets[removeBet].state === 'POINT') {
           // Can't remove a come bet

@@ -23,6 +23,8 @@ function BuildEvent(argv)
   const hardwaysbet = {'name': 'HardwaysBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''}}};
   const hardbet = {'name': 'HardBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''},
         'HardNumber': {'name': 'HardNumber', 'value': ''}}};
+  const placebet = {'name': 'PlaceBetIntent', 'slots': {'Amount': {'name': 'Amount', 'value': ''},
+        'PlaceNumber': {'name': 'PlaceNumber', 'value': ''}}};
   const roll = {'name': 'RollIntent', 'slots': {}};
   const rules = {'name': 'RulesIntent', 'slots': {}};
   const reset = {'name': 'ResetIntent', 'slots': {}};
@@ -154,6 +156,14 @@ function BuildEvent(argv)
     }
     if (argv.length > 4) {
       hardbet.slots.Amount.value = argv[4];
+    }
+  } else if (argv[2] == 'placebet') {
+    lambda.request.intent = placebet;
+    if (argv.length > 3) {
+      placebet.slots.PlaceNumber.value = argv[3];
+    }
+    if (argv.length > 4) {
+      placebet.slots.Amount.value = argv[4];
     }
   } else if (argv[2] == 'rules') {
     lambda.request.intent = rules;

@@ -139,6 +139,14 @@ SevenBetIntent {Amount} on big red
 SevenBetIntent {Amount} dollars on big red
 SevenBetIntent {Amount} units on big red
 
+PlaceBetIntent put a place bet on {PlaceNumber}
+PlaceBetIntent put a place bet on {PlaceNumber} for {Amount}
+PlaceBetIntent put a place bet on {PlaceNumber} for {Amount} dollars
+PlaceBetIntent put a place bet on {PlaceNumber} for {Amount} units
+PlaceBetIntent {Amount} on a place bet on {PlaceNumber}
+PlaceBetIntent {Amount} dollars on a place bet on {PlaceNumber}
+PlaceBetIntent {Amount} units on a place bet on {PlaceNumber}
+
 YoBetIntent place a yo bet
 YoBetIntent place a yo bet for {Amount}
 YoBetIntent place a yo bet for {Amount} dollars

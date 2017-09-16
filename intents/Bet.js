@@ -14,13 +14,15 @@ module.exports = {
     let speechError;
     let speech;
     let hardValue;
+    let placeValue;
     let bet = {};
+    let baseBet;
     const res = require('../' + this.event.request.locale + '/resources');
     const game = this.attributes[this.attributes.currentGame];
     const validBets = {
       'POINT': ['OddsBetIntent', 'FieldBetIntent', 'CrapsBetIntent',
           'HardBetIntent', 'HardwaysBetIntent', 'YoBetIntent', 'HornBetIntent',
-          'SevenBetIntent', 'ComeBetIntent', 'DontComeBetIntent'],
+          'SevenBetIntent', 'ComeBetIntent', 'DontComeBetIntent', 'PlaceBetIntent'],
       'NOPOINT': ['PassBetIntent', 'DontPassBetIntent', 'FieldBetIntent',
           'CrapsBetIntent', 'YoBetIntent', 'HornBetIntent', 'SevenBetIntent'],
     };
@@ -66,6 +68,29 @@ module.exports = {
             this.event.request.intent.name = 'HardwaysBetIntent';
           }
           break;
+        case 'PlaceBetIntent':
+          // Needs to be 4, 5, 6, 8, 9, or 10
+          if (this.event.request.intent.slots.PlaceNumber
+            && this.event.request.intent.slots.PlaceNumber.value) {
+            placeValue = parseInt(this.event.request.intent.slots.PlaceNumber.value);
+            if ([4, 5, 6, 8, 9, 10].indexOf(placeValue) === -1) {
+              // Well, if it's 7 make it a seven bet or 11 a Yo bet
+              if (hardValue === 7) {
+                this.event.request.intent.name = 'SevenBetIntent';
+              } else if (hardValue === 11) {
+                this.event.request.intent.name = 'YoBetIntent';
+              } else {
+                speechError = res.strings.BET_INVALID_PLACENUMBER
+                    .replace('{0}', this.event.request.intent.slots.PlaceNumber.value);
+                reprompt = res.strings.BET_INVALID_REPROMPT;
+              }
+            }
+          } else {
+            // Sorry, I need a number
+            speechError = res.strings.BET_NO_PLACENUMBER;
+            reprompt = res.strings.BET_INVALID_REPROMPT;
+          }
+          break;
         default:
           break;
       }
@@ -84,16 +109,24 @@ module.exports = {
         // Oops, you can't bet this much
         speechError = res.strings.BET_EXCEEDS_BANKROLL.replace('{0}', game.bankroll);
         reprompt = res.strings.BET_INVALID_REPROMPT;
-      } else if ((this.event.request.intent.name === 'OddsBetIntent') &&
-          (game.maxOdds && (bet.amount > (game.maxOdds * game.lineBet)))) {
-        speechError = res.strings.BET_EXCEEDS_ODDS.replace('{0}', game.maxOdds).replace('{1}', game.lineBet);
-        reprompt = res.strings.BET_INVALID_REPROMPT;
       } else {
         // Place the bet
         if (this.event.request.intent.name === 'HardwaysBetIntent') {
           bet.amount = bet.amount - (bet.amount % 4);
+        } else if (this.event.request.intent.name === 'OddsBetIntent') {
+          baseBet = utils.getBaseBet(game);
+          if (!baseBet) {
+            speechError = res.strings.BET_NO_BETFORODDS;
+            reprompt = res.strings.BET_INVALID_REPROMPT;
+          } else if (game.maxOdds && (bet.amount > (game.maxOdds * baseBet.amount))) {
+            speechError = res.strings.BET_EXCEEDS_ODDS.replace('{0}', game.maxOdds).replace('{1}', game.lineBet);
+            reprompt = res.strings.BET_INVALID_REPROMPT;
+          }
         }
-        game.bankroll -= bet.amount;
+
+        if (!speechError) {
+          game.bankroll -= bet.amount;
+        }
       }
     }
 
@@ -127,16 +160,22 @@ module.exports = {
         case 'OddsBetIntent':
           bet.type = 'OddsBet';
           speech = res.strings.ODDS_BET_PLACED;
-          if (utils.getLineBet(game.bets).type === 'PassBet') {
+          baseBet.odds = (baseBet.odds) ? (baseBet.odds + bet.amount) : bet.amount;
+          if ((baseBet.type === 'PassBet') || (baseBet.type === 'ComeBet')) {
             const payout = {4: 2, 5: 1.5, 6: 1.2, 8: 1.2, 9: 1.5, 10: 2};
-            bet.winningRolls = {};
-            bet.winningRolls[game.point] = payout[game.point];
-            bet.losingRolls = [7];
+            baseBet.oddsPayout = payout[baseBet.point];
           } else {
             const payout = {4: 0.5, 5: 0.6667, 6: 0.8334, 8: 0.8334, 9: 0.6667, 10: 0.5};
-            bet.winningRolls = {7: payout[game.point]};
-            bet.losingRolls = [game.point];
+            baseBet.oddsPayout = payout[baseBet.point];
           }
+          break;
+        case 'PlaceBetIntent':
+          const placePayout = {4: 1.8, 5: 1.4, 6: 1.1667, 8: 1.1667, 9: 1.4, 10: 1.8};
+          bet.type = 'PlaceBet';
+          bet.winningRolls = {};
+          bet.winningRolls[placeValue] = placePayout[placeValue];
+          bet.losingRolls = [7];
+          speech = res.strings.PLACE_BET_PLACED.replace('{1}', placeValue);
           break;
         case 'FieldBetIntent':
           bet.type = 'FieldBet';
@@ -175,10 +214,10 @@ module.exports = {
           speech = res.strings.HARDWAYS_BET_PLACED;
           break;
         case 'HardBetIntent':
-          const payout = {4: 7, 6: 9, 8: 9, 10: 7};
+          const hardPayout = {4: 7, 6: 9, 8: 9, 10: 7};
           bet.type = 'HardwayBet';
           bet.winningRolls = {};
-          bet.winningRolls[hardValue] = payout[hardValue];
+          bet.winningRolls[hardValue] = hardPayout[hardValue];
           bet.losingRolls = [7, hardValue];
           speech = res.strings.HARDWAY_BET_PLACED.replace('{1}', hardValue);
           break;
@@ -231,10 +270,12 @@ module.exports = {
           bet.amount = duplicateBet.amount;
           duplicateText = res.strings.BET_DUPLICATE_ADDED;
         }
-      } else if (game.bets) {
-        game.bets.push(bet);
-      } else {
-        game.bets = [bet];
+      } else if (bet.type !== 'OddsBet') {
+        if (game.bets) {
+          game.bets.push(bet);
+        } else {
+          game.bets = [bet];
+        }
       }
 
       reprompt = res.strings.BET_PLACED_REPROMPT;

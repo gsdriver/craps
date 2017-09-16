@@ -113,6 +113,19 @@
       ]
     },
     {
+      "intent": "PlaceBetIntent",
+      "slots": [
+        {
+          "name": "Amount",
+          "type": "AMAZON.Number"
+        },
+        {
+          "name": "PlaceNumber",
+          "type": "AMAZON.Number"
+        }
+      ]
+    },
+    {
       "intent": "RemoveIntent",
       "slots": [
         {

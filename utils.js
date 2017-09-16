@@ -119,9 +119,58 @@ module.exports = {
 
     return linebet;
   },
+  getBaseBet: function(game) {
+    let i;
+    let baseBet;
+
+    if (game.bets) {
+      for (i = game.bets.length - 1; i >= 0; i--) {
+        if ((game.bets[i].type === 'ComeBet')
+          || (game.bets[i].type === 'DontComeBet')) {
+          // You can only place this bet if there is a point
+          if (game.bets[i].state === 'POINT') {
+            baseBet = game.bets[i];
+            break;
+          }
+        } else if ((game.bets[i].type === 'PassBet')
+          || (game.bets[i].type === 'DontPassBet')) {
+          if (game.point) {
+            baseBet = game.bets[i];
+            break;
+          }
+        }
+      }
+    }
+
+    return baseBet;
+  },
   betsMatch: function(bet1, bet2) {
-    // Bets match if the types match - for now
-    return (bet1.type === bet2.type);
+    // Bets match if the types match
+    // and numbers for Place or Hardway bets
+    let match = false;
+
+    if (bet1.type === bet2.type) {
+      if ((bet1.type === 'PlaceBet') || (bet1.type === 'HardwayBet')) {
+        let bet1Number;
+        let bet2Number;
+        let roll;
+
+        for (roll in bet1.winningRolls) {
+          if (roll) {
+            bet1Number = roll;
+          }
+        }
+        for (roll in bet2.winningRolls) {
+          if (roll) {
+            bet2Number = roll;
+          }
+        }
+        match = (bet1Number === bet2Number);
+      } else {
+        match = true;
+      }
+    }
+    return match;
   },
   setEvent: function(event) {
     globalEvent = event;
