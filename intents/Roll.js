@@ -83,8 +83,8 @@ module.exports = {
           // But don't forget to add back their bets!
           if (total === game.point) {
             const rollsDown = (bet.winningRolls[total]) ?
-                game.losingRolls.length - 2 :
-                game.losingRolls.length - 1;
+                bet.losingRolls.length - 2 :
+                bet.losingRolls.length - 1;
             game.bankroll += (rollsDown * bet.amount) / 4;
             bet.remove = true;
           }
