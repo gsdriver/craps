@@ -153,7 +153,7 @@ module.exports = {
       if ((total === 7) || (total === game.point)) {
         newState = 'NOPOINT';
         game.point = undefined;
-        game.rounds++;
+        game.rounds = (game.rounds + 1) || 1;
         if (total === 7) {
           speech += res.strings.ROLL_SEVEN_CRAPS;
         } else {

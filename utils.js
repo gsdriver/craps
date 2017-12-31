@@ -6,7 +6,6 @@
 
 const AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
-const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 const speechUtils = require('alexa-speech-utils')();
 const request = require('request');
 
@@ -175,74 +174,48 @@ module.exports = {
   setEvent: function(event) {
     globalEvent = event;
   },
-  readLeaderBoard: function(locale, attributes, callback) {
+  readLeaderBoard: function(locale, userId, attributes, callback) {
     const res = require('./' + locale + '/resources');
     const game = attributes[attributes.currentGame];
+    let leaderURL = process.env.SERVICEURL + 'craps/leaders?game=' + attributes.currentGame;
+    let speech = '';
 
-    getTopScoresFromS3(attributes, (err, scores) => {
-      let speech = '';
+    if (game.rounds > 0) {
+      leaderURL += '&userId=' + userId + '&score=' + game.bankroll;
+    }
 
-      // OK, read up to five high scores
-      if (!scores || (scores.length === 0)) {
+    request(
+      {
+        uri: leaderURL,
+        method: 'GET',
+        timeout: 1000,
+      }, (err, response, body) => {
+      if (err) {
         // No scores to read
         speech = res.strings.LEADER_NO_SCORES;
       } else {
-        // What is your ranking - assuming you've played a round
-        if (game.rounds > 0) {
-          const bankrolls = scores.map((a) => a.bankroll);
-          const ranking = bankrolls.indexOf(game.bankroll) + 1;
+        const leaders = JSON.parse(body);
 
-          speech += res.strings.LEADER_RANKING
-            .replace('{0}', game.bankroll)
-            .replace('{1}', ranking)
-            .replace('{2}', scores.length);
-        }
-
-        // And what is the leader board?
-        const toRead = (scores.length > 5) ? 5 : scores.length;
-        const topScores = scores.slice(0, toRead).map((x) => {
-          if (x.name) {
-            return res.strings.LEADER_FORMAT_NAME
-                .replace('{0}', x.name)
-                .replace('{1}', x.bankroll);
-          } else {
-            return res.strings.LEADER_FORMAT.replace('{0}', x.bankroll);
+        if (!leaders.count || !leaders.top) {
+          // Something went wrong
+          speech = res.strings.LEADER_NO_SCORES;
+        } else {
+          // What is your ranking - assuming you've played a round
+          if (leaders.rank) {
+            speech += res.strings.LEADER_RANKING
+              .replace('{0}', game.bankroll)
+              .replace('{1}', leaders.rank)
+              .replace('{2}', leaders.count);
           }
-        });
-        speech += res.strings.LEADER_TOP_SCORES.replace('{0}', toRead);
-        speech += speechUtils.and(topScores, {locale: locale, pause: '300ms'});
+
+          // And what is the leader board?
+          const topScores = leaders.top.map((x) => res.strings.LEADER_FORMAT.replace('{0}', x));
+          speech += res.strings.LEADER_TOP_SCORES.replace('{0}', topScores.length);
+          speech += speechUtils.and(topScores, {locale: locale, pause: '300ms'});
+        }
       }
 
       callback(speech);
     });
   },
 };
-
-function getTopScoresFromS3(attributes, callback) {
-  // Read the S3 buckets that has everyone's scores
-  const myScore = attributes[attributes.currentGame].bankroll;
-
-  s3.getObject({Bucket: 'garrett-alexa-usage', Key: 'CrapsScores.txt'}, (err, data) => {
-    if (err) {
-      console.log(err, err.stack);
-      callback(err, null);
-    } else {
-      const ranking = JSON.parse(data.Body.toString('ascii'));
-      const scores = ranking.scores;
-
-      if (scores && scores[attributes.currentGame]) {
-        const bankroll = scores[attributes.currentGame].map((a) => a.bankroll);
-
-        // If their current high score isn't in the list, add it
-        if (bankroll.indexOf(myScore) < 0) {
-          scores[attributes.currentGame].push({name: attributes.firstName, bankroll: myScore});
-        }
-
-        callback(null, scores[attributes.currentGame].sort((a, b) => (b.bankroll - a.bankroll)));
-      } else {
-        console.log('No scores for ' + attributes.currentGame);
-        callback('No scoreset', null);
-      }
-    }
-  });
-}
