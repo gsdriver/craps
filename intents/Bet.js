@@ -209,7 +209,7 @@ module.exports = {
           break;
         case 'HardwaysBetIntent':
           bet.type = 'HardwaysBet';
-          bet.winningRolls = {4: 7, 6: 9, 8: 9, 10: 7};
+          bet.winningRolls = {4: 1.75, 6: 2.25, 8: 2.25, 10: 1.75};
           bet.losingRolls = [4, 6, 8, 10, 7];
           speech = res.strings.HARDWAYS_BET_PLACED;
           break;
