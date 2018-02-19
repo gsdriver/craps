@@ -17,6 +17,7 @@ const Repeat = require('./intents/Repeat');
 const Remove = require('./intents/Remove');
 const utils = require('./utils');
 const request = require('request');
+const dashbot = require('dashbot')(process.env.DASHBOTKEY).alexa;
 
 const APP_ID = 'amzn1.ask.skill.f899a65f-5849-4ecd-a7fb-9b659e21fccb';
 
@@ -144,7 +145,7 @@ const handlers = {
   },
 };
 
-exports.handler = function(event, context, callback) {
+exports.handler = dashbot.handler((event, context, callback) => {
   AWS.config.update({region: 'us-east-1'});
 
   const alexa = Alexa.handler(event, context);
@@ -178,7 +179,7 @@ exports.handler = function(event, context, callback) {
     alexa.registerHandlers(handlers, resetHandlers, noPointHandlers, pointHandlers);
     alexa.execute();
   }
-};
+});
 
 function saveState(userId, attributes) {
   const formData = {};
