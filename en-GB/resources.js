@@ -15,9 +15,9 @@ const resources = {
   // From Bet.js
   'BET_INVALID_AMOUNT': 'I\'m sorry, {0} is not a valid amount to bet.',
   'BET_INVALID_REPROMPT': 'What else can I help you with?',
-  'BET_EXCEEDS_MAX': 'Sorry, this bet exceeds the maximum bet of ${0}.',
-  'BET_EXCEEDS_BANKROLL': 'Sorry, this bet exceeds your bankroll of ${0}.',
-  'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of ${1}.',
+  'BET_EXCEEDS_MAX': 'Sorry, this bet exceeds the maximum bet of £{0}.',
+  'BET_EXCEEDS_BANKROLL': 'Your bankroll is £{0}, placing a bet in that amount instead of £{1}. ',
+  'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of £{1}.',
   'BET_INVALID_HARDNUMBER': 'Sorry, {0} is not a valid hard way bet. ',
   'BET_INVALID_PLACENUMBER': 'Sorry, {0} is not a valid place bet. ',
   'BET_NO_PLACENUMBER': 'Sorry, I didn\'t hear a place number. ',
@@ -25,21 +25,21 @@ const resources = {
   'INVALID_BET_NO_POINT': 'Sorry, this bet can\'t be played until a point has been established.',
   'INVALID_BET_POINT': 'Sorry, this bet can\'t be played once a point has been established.',
   'INVALID_BET_HAVE_LINEBET': 'Sorry, you already have a line bet in play.',
-  'PASSBET_PLACED': '${0} pass bet placed.',
-  'DONTPASSBET_PLACED': '${0} don\'t pass bet placed.',
-  'ODDS_BET_PLACED': '${0} odds placed.',
-  'FIELD_BET_PLACED': '${0} field bet placed.',
-  'CRAPS_BET_PLACED': '${0} craps bet placed.',
-  'YO_BET_PLACED': '${0} bet on yo eleven.',
-  'HORN_BET_PLACED': '${0} horn bet placed.',
-  'SEVEN_BET_PLACED': '${0} bet on seven.',
-  'COME_BET_PLACED': '${0} come bet placed.',
-  'DONTCOME_BET_PLACED': '${0} don\'t come bet placed.',
-  'HARDWAY_BET_PLACED': '${0} placed on hard {1}.',
-  'HARDWAYS_BET_PLACED': '${0} divided among the hard way bets.',
-  'PLACE_BET_PLACED': '${0} place bet on {1}.',
+  'PASSBET_PLACED': '£{0} pass bet placed.',
+  'DONTPASSBET_PLACED': '£{0} don\'t pass bet placed.',
+  'ODDS_BET_PLACED': '£{0} odds placed.',
+  'FIELD_BET_PLACED': '£{0} field bet placed.',
+  'CRAPS_BET_PLACED': '£{0} craps bet placed.',
+  'YO_BET_PLACED': '£{0} bet on yo eleven.',
+  'HORN_BET_PLACED': '£{0} horn bet placed.',
+  'SEVEN_BET_PLACED': '£{0} bet on seven.',
+  'COME_BET_PLACED': '£{0} come bet placed.',
+  'DONTCOME_BET_PLACED': '£{0} don\'t come bet placed.',
+  'HARDWAY_BET_PLACED': '£{0} placed on hard {1}.',
+  'HARDWAYS_BET_PLACED': '£{0} divided among the hard way bets.',
+  'PLACE_BET_PLACED': '£{0} place bet on {1}.',
   'BET_DUPLICATE_ADDED': 'Adding to your existing bet for a total of ',
-  'BET_DUPLICATE_NOT_ADDED': 'You already placed ${0} on this bet, and another ${1} would exceed the maximum bet of ${2}. ',
+  'BET_DUPLICATE_NOT_ADDED': 'You already placed £{0} on this bet, and another £{1} would exceed the maximum bet of £{2}. ',
   'BET_PLACED_REPROMPT': 'Place another bet or say roll to roll the dice.',
   // From Exit.js
   'EXIT_GAME': '{0} Goodbye.',
@@ -65,12 +65,12 @@ const resources = {
   'REMOVE_ODDS': 'Removing odds from {0}. ',
   // From Repeat.js
   'READ_REPROMPT': 'What else can I help you with?',
-  'READ_BANKROLL': 'You have ${0}. ',
+  'READ_BANKROLL': 'You have £{0}. ',
   'READ_POINT': 'The point is {0}. ',
   'READ_BETS': 'You bet {0}. ',
   // From Reset.js
   'RESET_CONFIRM': 'Would you like to reset the game? This will reset your bankroll, clear all bets, and abort the current roll.',
-  'RESET_COMPLETED': 'You have $1000. You can place a line bet or say read high scores to hear the leader board.',
+  'RESET_COMPLETED': 'You have £1000. You can place a line bet or say read high scores to hear the leader board.',
   'RESET_REPROMPT': 'You can place a line bet or say read high scores to hear the leader board.',
   'RESET_ABORTED': 'Game not reset.',
   'RESET_INVALIDACTION_REPROMPT': 'What else can I help you with?',
@@ -79,11 +79,11 @@ const resources = {
   'ROLL_RESULT': 'You got {0}. ',
   'ROLL_NOBETS': 'Sorry, you have to place a line bet before you can roll the dice.',
   'ROLL_INVALID_REPROMPT': 'Place a bet',
-  'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of ${0} can\'t support your last line bet.',
-  'ROLL_BUSTED': 'You lost all your money. Resetting to $1000 and clearing your bets. ',
+  'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of £{0} can\'t support your last line bet.',
+  'ROLL_BUSTED': 'You lost all your money. Resetting to £1000 and clearing your bets. ',
   'ROLL_BUSTED_REPROMPT': 'Place new bets.',
-  'ROLL_NET_WIN': ' You won ${0}. ',
-  'ROLL_NET_LOSE': ' You lost ${0}. ',
+  'ROLL_NET_WIN': ' You won £{0}. ',
+  'ROLL_NET_LOSE': ' You lost £{0}. ',
   'ROLL_NET_PUSH': ' You broke even. ',
   'ROLL_REPROMPT': 'Say roll to roll the dice.',
   'ROLL_COME_REPROMPT': 'Would you like to play another round?',
@@ -92,10 +92,10 @@ const resources = {
   'ROLL_GOT_POINT': 'You rolled the point! ',
   'ROLL_OFF_TABLE': 'Oops, one of the dice fell off the table - rolling again. ',
   // From utils.js
-  'LEADER_RANKING': 'Your current bankroll of ${0} ranks you as <say-as interpret-as="ordinal">{1}</say-as> of {2} players. ',
+  'LEADER_RANKING': 'Your current bankroll of £{0} ranks you as <say-as interpret-as="ordinal">{1}</say-as> of {2} players. ',
   'LEADER_NO_SCORES': 'Sorry, I\'m unable to read the current leader board',
-  'LEADER_FORMAT': '${0}',
-  'LEADER_FORMAT_NAME': '{0} with ${1}',
+  'LEADER_FORMAT': '£{0}',
+  'LEADER_FORMAT_NAME': '{0} with £{1}',
   'LEADER_TOP_SCORES': 'The top {0} bankrolls are ',
 };
 
@@ -144,28 +144,28 @@ module.exports = {
 
     switch (bet.type) {
       case 'PassBet':
-        format = '${0} on the pass line';
+        format = '£{0} on the pass line';
         break;
       case 'DontPassBet':
-        format = '${0} on the don\'t pass line';
+        format = '£{0} on the don\'t pass line';
         break;
       case 'FieldBet':
-        format = 'a ${0} field bet';
+        format = 'a £{0} field bet';
         break;
       case 'CrapsBet':
-        format = 'a ${0} craps bet';
+        format = 'a £{0} craps bet';
         break;
       case 'YoBet':
-        format = 'a ${0} yo eleven bet';
+        format = 'a £{0} yo eleven bet';
         break;
       case 'HardwaysBet':
-        format = '${0} divided among the hard ways';
+        format = '£{0} divided among the hard ways';
         break;
       case 'HornBet':
-        format = '${0} horn bet';
+        format = '£{0} horn bet';
         break;
       case 'SevenBet':
-        format = '${0} on seven';
+        format = '£{0} on seven';
         break;
       case 'PlaceBet':
         let placeNumber;
@@ -174,20 +174,20 @@ module.exports = {
             placeNumber = roll;
           }
         }
-        format = '${0} place bet on ' + placeNumber;
+        format = '£{0} place bet on ' + placeNumber;
         break;
       case 'ComeBet':
         if (bet.point) {
-          format = '${0} come bet with a point of ' + bet.point;
+          format = '£{0} come bet with a point of ' + bet.point;
         } else {
-          format = '${0} come bet';
+          format = '£{0} come bet';
         }
         break;
       case 'DontComeBet':
         if (bet.point) {
-          format = '${0} don\'t come bet with a point of ' + bet.point;
+          format = '£{0} don\'t come bet with a point of ' + bet.point;
         } else {
-          format = '${0} don\'t come bet';
+          format = '£{0} don\'t come bet';
         }
         break;
       case 'HardwayBet':
@@ -197,16 +197,16 @@ module.exports = {
             hardNumber = roll;
           }
         }
-        format = '${0} on hard ' + hardNumber;
+        format = '£{0} on hard ' + hardNumber;
         break;
       default:
-        format = '${0}';
+        format = '£{0}';
         break;
     }
 
     result = format.replace('{0}', bet.amount);
     if (bet.odds) {
-      result += (' with $' + bet.odds + ' odds');
+      result += (' with £' + bet.odds + ' odds');
     }
 
     return result;
@@ -223,11 +223,11 @@ module.exports = {
     let format;
 
     if (game.minBet && game.maxBet) {
-      format = 'between ${0} and ${1}';
+      format = 'between £{0} and £{1}';
     } else if (game.minBet) {
-      format = '${0} or more';
+      format = '£{0} or more';
     } else if (game.maxBet) {
-      format = '${1} or less';
+      format = '£{1} or less';
     } else {
       format = 'any amount';
     }

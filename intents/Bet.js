@@ -12,7 +12,7 @@ module.exports = {
     // of either the last bet amount or 1 unit
     let reprompt;
     let speechError;
-    let speech;
+    let speech = '';
     let hardValue;
     let placeValue;
     let bet = {};
@@ -106,10 +106,14 @@ module.exports = {
         speechError = res.strings.BET_EXCEEDS_MAX.replace('{0}', game.maxBet);
         reprompt = res.strings.BET_INVALID_REPROMPT;
       } else if (bet.amount > game.bankroll) {
-        // Oops, you can't bet this much
-        speechError = res.strings.BET_EXCEEDS_BANKROLL.replace('{0}', game.bankroll);
-        reprompt = res.strings.BET_INVALID_REPROMPT;
-      } else {
+        // Oops, you can't bet this much - modify the bet to match your bankroll
+        speech = res.strings.BET_EXCEEDS_BANKROLL
+          .replace('{0}', game.bankroll)
+          .replace('{1}', bet.amount);
+        bet.amount = game.bankroll;
+      }
+
+      if (!speechError) {
         // Place the bet
         if (this.event.request.intent.name === 'HardwaysBetIntent') {
           bet.amount = bet.amount - (bet.amount % 4);
@@ -137,29 +141,29 @@ module.exports = {
           game.lineBet = bet.amount;
           game.passPlayer = false;
           bet = utils.createLineBet(bet.amount, game.passPlayer);
-          speech = res.strings.DONTPASSBET_PLACED;
+          speech += res.strings.DONTPASSBET_PLACED;
           break;
         case 'PassBetIntent':
           game.lineBet = bet.amount;
           game.passPlayer = true;
           bet = utils.createLineBet(bet.amount, game.passPlayer);
-          speech = res.strings.PASSBET_PLACED;
+          speech += res.strings.PASSBET_PLACED;
           break;
         case 'ComeBetIntent':
           bet = utils.createLineBet(bet.amount, true);
           bet.type = 'ComeBet';
-          speech = res.strings.COME_BET_PLACED;
+          speech += res.strings.COME_BET_PLACED;
           bet.state = 'NOPOINT';
           break;
         case 'DontComeBetIntent':
           bet = utils.createLineBet(bet.amount, false);
           bet.type = 'DontComeBet';
-          speech = res.strings.DONTCOME_BET_PLACED;
+          speech += res.strings.DONTCOME_BET_PLACED;
           bet.state = 'NOPOINT';
           break;
         case 'OddsBetIntent':
           bet.type = 'OddsBet';
-          speech = res.strings.ODDS_BET_PLACED;
+          speech += res.strings.ODDS_BET_PLACED;
           baseBet.odds = (baseBet.odds) ? (baseBet.odds + bet.amount) : bet.amount;
           if ((baseBet.type === 'PassBet') || (baseBet.type === 'ComeBet')) {
             const payout = {4: 2, 5: 1.5, 6: 1.2, 8: 1.2, 9: 1.5, 10: 2};
@@ -175,43 +179,43 @@ module.exports = {
           bet.winningRolls = {};
           bet.winningRolls[placeValue] = placePayout[placeValue];
           bet.losingRolls = [7];
-          speech = res.strings.PLACE_BET_PLACED.replace('{1}', placeValue);
+          speech += res.strings.PLACE_BET_PLACED.replace('{1}', placeValue);
           break;
         case 'FieldBetIntent':
           bet.type = 'FieldBet';
           bet.winningRolls = {2: 2, 3: 1, 4: 1, 9: 1, 10: 1, 11: 1, 12: 3};
           bet.losingRolls = [5, 6, 7, 8];
-          speech = res.strings.FIELD_BET_PLACED;
+          speech += res.strings.FIELD_BET_PLACED;
           break;
         case 'CrapsBetIntent':
           bet.type = 'CrapsBet';
           bet.winningRolls = {2: 7, 3: 7, 12: 7};
           bet.losingRolls = [4, 5, 6, 7, 8, 9, 10, 11];
-          speech = res.strings.CRAPS_BET_PLACED;
+          speech += res.strings.CRAPS_BET_PLACED;
           break;
         case 'YoBetIntent':
           bet.type = 'YoBet';
           bet.winningRolls = {11: 15};
           bet.losingRolls = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
-          speech = res.strings.YO_BET_PLACED;
+          speech += res.strings.YO_BET_PLACED;
           break;
         case 'HornBetIntent':
           bet.type = 'HornBet';
           bet.winningRolls = {2: 6.75, 3: 3, 11: 3, 12: 6.75};
           bet.losingRolls = [4, 5, 6, 7, 8, 9, 10];
-          speech = res.strings.HORN_BET_PLACED;
+          speech += res.strings.HORN_BET_PLACED;
           break;
         case 'SevenBetIntent':
           bet.type = 'SevenBet';
           bet.winningRolls = {7: 4};
           bet.losingRolls = [2, 3, 4, 5, 6, 8, 9, 10, 11, 12];
-          speech = res.strings.SEVEN_BET_PLACED;
+          speech += res.strings.SEVEN_BET_PLACED;
           break;
         case 'HardwaysBetIntent':
           bet.type = 'HardwaysBet';
           bet.winningRolls = {4: 1.75, 6: 2.25, 8: 2.25, 10: 1.75};
           bet.losingRolls = [4, 6, 8, 10, 7];
-          speech = res.strings.HARDWAYS_BET_PLACED;
+          speech += res.strings.HARDWAYS_BET_PLACED;
           break;
         case 'HardBetIntent':
           const hardPayout = {4: 7, 6: 9, 8: 9, 10: 7};
@@ -219,7 +223,7 @@ module.exports = {
           bet.winningRolls = {};
           bet.winningRolls[hardValue] = hardPayout[hardValue];
           bet.losingRolls = [7, hardValue];
-          speech = res.strings.HARDWAY_BET_PLACED.replace('{1}', hardValue);
+          speech += res.strings.HARDWAY_BET_PLACED.replace('{1}', hardValue);
           break;
         default:
           // This shouldn't happen

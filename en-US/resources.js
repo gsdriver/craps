@@ -16,7 +16,7 @@ const resources = {
   'BET_INVALID_AMOUNT': 'I\'m sorry, {0} is not a valid amount to bet.',
   'BET_INVALID_REPROMPT': 'What else can I help you with?',
   'BET_EXCEEDS_MAX': 'Sorry, this bet exceeds the maximum bet of ${0}.',
-  'BET_EXCEEDS_BANKROLL': 'Sorry, this bet exceeds your bankroll of ${0}.',
+  'BET_EXCEEDS_BANKROLL': 'Your bankroll is ${0}, placing a bet in that amount instead of ${1}. ',
   'BET_EXCEEDS_ODDS': 'Sorry, this bet exceeds {0} times odds based on your line bet of ${1}.',
   'BET_INVALID_HARDNUMBER': 'Sorry, {0} is not a valid hard way bet. ',
   'BET_INVALID_PLACENUMBER': 'Sorry, {0} is not a valid place bet. ',

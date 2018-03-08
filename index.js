@@ -66,10 +66,10 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'ResetIntent': Reset.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
-  'AMAZON.NoIntent': Exit.handleIntent,
+  'AMAZON.NoIntent': Remove.handleIntent,
   'AMAZON.HelpIntent': Help.handleIntent,
   'AMAZON.StopIntent': Exit.handleIntent,
-  'AMAZON.CancelIntent': Exit.handleIntent,
+  'AMAZON.CancelIntent': Remove.handleIntent,
   'SessionEndedRequest': function() {
     saveState(this.event.session.user.userId, this.attributes);
   },
@@ -104,10 +104,10 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   'ResetIntent': Reset.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
-  'AMAZON.NoIntent': Exit.handleIntent,
+  'AMAZON.NoIntent': Remove.handleIntent,
   'AMAZON.HelpIntent': Help.handleIntent,
   'AMAZON.StopIntent': Exit.handleIntent,
-  'AMAZON.CancelIntent': Exit.handleIntent,
+  'AMAZON.CancelIntent': Remove.handleIntent,
   'SessionEndedRequest': function() {
     saveState(this.event.session.user.userId, this.attributes);
   },

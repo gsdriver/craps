@@ -181,7 +181,7 @@ module.exports = {
     let speech = '';
 
     if (game.rounds > 0) {
-      leaderURL += '&userId=' + userId + '&score=' + game.bankroll;
+      leaderURL += '&userId=' + userId + '&score=' + game.bankroll + '&items=6';
     }
 
     request(
@@ -200,6 +200,22 @@ module.exports = {
           // Something went wrong
           speech = res.strings.LEADER_NO_SCORES;
         } else {
+          // One player has an absurd score due to a previous
+          // bug in the payout tables.  If this isn't that player
+          // just remove that score so the high score table doesn't
+          // sound broken.  For that player, keep the score in so they
+          // are still motivated by being number one
+          const BIGBANKROLL = 1000000000;
+          if ((leaders.top[0] > BIGBANKROLL) && (game.bankroll < BIGBANKROLL)) {
+            // Pop this top score off and modify
+            leaders.top.shift();
+            leaders.rank--;
+            leaders.count--;
+          } else if (leaders.top.length > 5) {
+            leaders.top.pop();
+            leaders.count--;
+          }
+
           // What is your ranking - assuming you've played a round
           if (leaders.rank) {
             speech += res.strings.LEADER_RANKING
