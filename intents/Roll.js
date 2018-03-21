@@ -249,8 +249,10 @@ module.exports = {
     game.bankroll += (won + winningBets);
     this.handler.state = newState;
 
-    // If they have no units left, reset the bankroll
-    if (game.bankroll < game.minBet) {
+    // If they have no units left, and they no longer have any
+    // bets in play, then reset the bankroll
+    if ((game.bankroll < game.minBet) &&
+      (!game.bets || (game.bets.length == 0))) {
       if (game.canReset) {
         game.bankroll = 1000;
         speech += res.strings.ROLL_BUSTED;
