@@ -120,6 +120,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
 const handlers = {
   'NewSession': function() {
     // Initialize attributes and route the request
+    this.attributes.playerLocale = this.event.request.locale;
     if (!this.attributes.currentGame) {
       this.attributes.currentGame = 'basic';
     }

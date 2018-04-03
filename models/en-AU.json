@@ -1,0 +1,513 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "craps table",
+      "intents": [
+        {
+          "name": "PassBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "bet",
+            "place a bet",
+            "place a pass bet",
+            "place a pass line bet",
+            "bet {Amount}",
+            "bet {Amount} dollars",
+            "bet {Amount} units",
+            "place a bet for {Amount}",
+            "place a bet for {Amount} dollars",
+            "place a bet for {Amount} units",
+            "place a pass bet for {Amount}",
+            "place a pass bet for {Amount} dollars",
+            "place a pass bet for {Amount} units",
+            "place a pass line bet for {Amount}",
+            "place a pass line bet for {Amount} dollars",
+            "place a pass line bet for {Amount} units",
+            "bet {Amount} on the pass line",
+            "bet {Amount} dollars on the pass line",
+            "bet {Amount} units on the pass line",
+            "{Amount} on the pass line",
+            "{Amount} dollars on the pass line",
+            "{Amount} units on the pass line",
+            "put {Amount} on the pass line",
+            "put {Amount} dollars on the pass line",
+            "put {Amount} units on the pass line"
+          ]
+        },
+        {
+          "name": "DontPassBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a don't pass bet",
+            "place a don't pass line bet",
+            "bet {Amount} on don't pass",
+            "bet {Amount} dollars on don't pass",
+            "bet {Amount} units on don't pass",
+            "place a bet for {Amount} on don't pass",
+            "place a bet for {Amount} dollars on don't pass",
+            "place a bet for {Amount} units on don't pass",
+            "place a don't pass bet for {Amount}",
+            "place a don't pass bet for {Amount} dollars",
+            "place a don't pass bet for {Amount} units",
+            "place a don't pass line bet for {Amount}",
+            "place a don't pass line bet for {Amount} dollars",
+            "place a don't pass line bet for {Amount} units",
+            "bet {Amount} on the don't pass line",
+            "bet {Amount} dollars on the don't pass line",
+            "bet {Amount} units on the don't pass line",
+            "{Amount} on the don't pass line",
+            "{Amount} dollars on the don't pass line",
+            "{Amount} units on the don't pass line",
+            "put {Amount} on the don't pass line",
+            "put {Amount} dollars on the don't pass line",
+            "put {Amount} units on the don't pass line",
+            "bet {Amount} on don't pass",
+            "bet {Amount} dollars on don't pass",
+            "bet {Amount} units on don't pass",
+            "{Amount} on don't pass",
+            "{Amount} dollars on don't pass",
+            "{Amount} units on don't pass",
+            "put {Amount} on don't pass",
+            "put {Amount} dollars on don't pass",
+            "put {Amount} units on don't pass"
+          ]
+        },
+        {
+          "name": "OddsBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place odds",
+            "place an odds bet",
+            "lay odds for {Amount}",
+            "lay odds for {Amount} dollars",
+            "lay odds for {Amount} units",
+            "place odds for {Amount}",
+            "place odds for {Amount} dollars",
+            "place odds for {Amount} units"
+          ]
+        },
+        {
+          "name": "FieldBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a field bet",
+            "play the field",
+            "place a field bet for {Amount}",
+            "place a field bet for {Amount} dollars",
+            "place a field bet for {Amount} units",
+            "play the field for {Amount}",
+            "play the field for {Amount} dollars",
+            "play the field for {Amount} units",
+            "field for {Amount}",
+            "field for {Amount} dollars",
+            "field for {Amount} units",
+            "{Amount} on the field",
+            "{Amount} dollars on the field",
+            "{Amount} units on the field"
+          ]
+        },
+        {
+          "name": "ComeBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a come bet",
+            "place a come bet for {Amount}",
+            "place a come bet for {Amount} dollars",
+            "place a come bet for {Amount} units",
+            "come bet for {Amount}",
+            "come bet for {Amount} dollars",
+            "come bet for {Amount} units",
+            "{Amount} on come",
+            "{Amount} dollars on come",
+            "{Amount} units on come"
+          ]
+        },
+        {
+          "name": "DontComeBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a don't come bet",
+            "place a don't come bet for {Amount}",
+            "place a don't come bet for {Amount} dollars",
+            "place a don't come bet for {Amount} units",
+            "don't come bet for {Amount}",
+            "don't come bet for {Amount} dollars",
+            "don't come bet for {Amount} units",
+            "{Amount} on don't come",
+            "{Amount} dollars on don't come",
+            "{Amount} units on don't come"
+          ]
+        },
+        {
+          "name": "CrapsBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a craps bet",
+            "place a craps bet for {Amount}",
+            "place a craps bet for {Amount} dollars",
+            "place a craps bet for {Amount} units",
+            "craps for {Amount}",
+            "craps for {Amount} dollars",
+            "craps for {Amount} units",
+            "{Amount} on craps",
+            "{Amount} dollars on craps",
+            "{Amount} units on craps"
+          ]
+        },
+        {
+          "name": "HornBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a horn bet",
+            "place a horn bet for {Amount}",
+            "place a horn bet for {Amount} dollars",
+            "place a horn bet for {Amount} units",
+            "horn for {Amount}",
+            "horn for {Amount} dollars",
+            "horn for {Amount} units",
+            "{Amount} on the horn",
+            "{Amount} dollars on the horn",
+            "{Amount} units on the horn"
+          ]
+        },
+        {
+          "name": "SevenBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "bet on seven",
+            "bet on seven for {Amount}",
+            "bet on seven for {Amount} dollars",
+            "bet on seven for {Amount} units",
+            "big red for {Amount}",
+            "big red for {Amount} dollars",
+            "big red for {Amount} units",
+            "{Amount} on seven",
+            "{Amount} dollars on seven",
+            "{Amount} units on seven",
+            "{Amount} on big red",
+            "{Amount} dollars on big red",
+            "{Amount} units on big red"
+          ]
+        },
+        {
+          "name": "YoBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "place a yo eleven bet for {Amount}",
+            "place a yo eleven bet for {Amount} dollars",
+            "place a yo eleven bet",
+            "yo eleven for {Amount}",
+            "yo eleven for {Amount} dollars",
+            "yo eleven for {Amount} units",
+            "{Amount} on eleven",
+            "{Amount} dollars on eleven",
+            "{Amount} units on eleven",
+            "place a eleven bet",
+            "place a eleven bet for {Amount}",
+            "place a eleven bet for {Amount} dollars",
+            "place a eleven bet for {Amount} units",
+            "eleven for {Amount}",
+            "eleven for {Amount} dollars",
+            "eleven for {Amount} units"
+          ]
+        },
+        {
+          "name": "HardwaysBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "bet on the hardways",
+            "place a bet on the hardways",
+            "bet {Amount} on the hardways",
+            "bet {Amount} dollars on the hardways",
+            "bet {Amount} units on the hardways",
+            "hardways for {Amount} dollars",
+            "hardways for {Amount} units",
+            "{Amount} on the hardways",
+            "{Amount} dollars on the hardways",
+            "{Amount} units on the hardways"
+          ]
+        },
+        {
+          "name": "HardBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "HardNumber",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "bet on hard {HardNumber}",
+            "hard {HardNumber}",
+            "bet {Amount} on hard {HardNumber}",
+            "bet {Amount} dollars on hard {HardNumber}",
+            "bet {Amount} units on hard {HardNumber}",
+            "hard {HardNumber}",
+            "hard {HardNumber} for {Amount}",
+            "hard {HardNumber} for {Amount} dollars",
+            "hard {HardNumber} for {Amount} units",
+            "{Amount} on hard {HardNumber}",
+            "{Amount} dollars on hard {HardNumber}",
+            "{Amount} units on hard {HardNumber}",
+            "put {Amount} on hard {HardNumber}",
+            "put {Amount} dollars on hard {HardNumber}",
+            "put {Amount} units on hard {HardNumber}",
+            "bet {Amount} on hard {HardNumber}",
+            "bet {Amount} dollars on hard {HardNumber}",
+            "bet {Amount} units on hard {HardNumber}"
+          ]
+        },
+        {
+          "name": "PlaceBetIntent",
+          "slots": [
+            {
+              "name": "Amount",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "PlaceNumber",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "put a place bet on {PlaceNumber}",
+            "put a place bet on {PlaceNumber} for {Amount}",
+            "put a place bet on {PlaceNumber} for {Amount} dollars",
+            "put a place bet on {PlaceNumber} for {Amount} units",
+            "{Amount} on a place bet on {PlaceNumber}",
+            "{Amount} dollars on a place bet on {PlaceNumber}",
+            "{Amount} units on a place bet on {PlaceNumber}"
+          ]
+        },
+        {
+          "name": "RemoveIntent",
+          "slots": [
+            {
+              "name": "Bet",
+              "type": "LIST_OF_BETS"
+            }
+          ],
+          "samples": [
+            "remove my {Bet} bet",
+            "remove the {Bet} bet",
+            "remove my bet",
+            "undo that bet",
+            "undo the {Bet} bet"
+          ]
+        },
+        {
+          "name": "RollIntent",
+          "samples": [
+            "roll the dice",
+            "shoot the dice",
+            "roll",
+            "shoot",
+            "let's play"
+          ]
+        },
+        {
+          "name": "HighScoreIntent",
+          "samples": [
+            "read high scores",
+            "tell me high scores",
+            "what are the high scores",
+            "what is the leader board",
+            "read leader board",
+            "say high scores",
+            "say leader board"
+          ]
+        },
+        {
+          "name": "ResetIntent",
+          "samples": [
+            "reset game",
+            "reset bankroll",
+            "reset the game",
+            "reset the bankroll",
+            "reset my game",
+            "reset my bankroll",
+            "reset"
+          ]
+        },
+        {
+          "name": "AMAZON.RepeatIntent"
+        },
+        {
+          "name": "AMAZON.YesIntent"
+        },
+        {
+          "name": "AMAZON.NoIntent"
+        },
+        {
+          "name": "AMAZON.HelpIntent"
+        },
+        {
+          "name": "AMAZON.StopIntent"
+        },
+        {
+          "name": "AMAZON.CancelIntent"
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "first"
+              }
+            },
+            {
+              "name": {
+                "value": "last"
+              }
+            },
+            {
+              "name": {
+                "value": "pass"
+              }
+            },
+            {
+              "name": {
+                "value": "don't pass"
+              }
+            },
+            {
+              "name": {
+                "value": "odds"
+              }
+            },
+            {
+              "name": {
+                "value": "field"
+              }
+            },
+            {
+              "name": {
+                "value": "craps"
+              }
+            },
+            {
+              "name": {
+                "value": "hard"
+              }
+            },
+            {
+              "name": {
+                "value": "hardway"
+              }
+            },
+            {
+              "name": {
+                "value": "hard way"
+              }
+            },
+            {
+              "name": {
+                "value": "yo"
+              }
+            },
+            {
+              "name": {
+                "value": "eleven"
+              }
+            },
+            {
+              "name": {
+                "value": "yo eleven"
+              }
+            },
+            {
+              "name": {
+                "value": "horn"
+              }
+            },
+            {
+              "name": {
+                "value": "seven"
+              }
+            },
+            {
+              "name": {
+                "value": "big red"
+              }
+            },
+            {
+              "name": {
+                "value": "come"
+              }
+            },
+            {
+              "name": {
+                "value": "place"
+              }
+            },
+            {
+              "name": {
+                "value": "place bet"
+              }
+            }
+          ],
+          "name": "LIST_OF_BETS"
+        }
+      ]
+    }
+  }
+}
