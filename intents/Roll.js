@@ -5,6 +5,7 @@
 'use strict';
 
 const utils = require('../utils');
+const seedrandom = require('seedrandom');
 
 module.exports = {
   handleIntent: function() {
@@ -41,7 +42,17 @@ module.exports = {
     }
 
     // Pick two random dice rolls
-    game.dice = [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
+    const randomValue1 = seedrandom('1' + this.event.session.user.userId + (game.timestamp ? game.timestamp : ''))();
+    const randomValue2 = seedrandom('2' + this.event.session.user.userId + (game.timestamp ? game.timestamp : ''))();
+    const die1 = Math.floor(randomValue1 * 6) + 1;
+    const die2 = Math.floor(randomValue2 * 6) + 1;
+    if (die1 == 7) {
+      die1--;
+    }
+    if (die2 == 7) {
+      die2--;
+    }
+    game.dice = [die1, die2];
     game.rolls++;
     const total = game.dice[0] + game.dice[1];
 
@@ -51,7 +62,8 @@ module.exports = {
     let offTable;
     if (game.rolls >= 4) {
       // Roll can be off table starting with fourth roll
-      if (Math.floor(Math.random() * Math.sqrt(9 * (game.rolls - 4) + 1)) === 0) {
+      const randomValue = seedrandom(this.event.session.user.userId + (game.timestamp ? game.timestamp : ''))();
+      if (Math.floor(randomValue * Math.sqrt(9 * (game.rolls - 4) + 1)) === 0) {
         offTable = true;
       }
     }
