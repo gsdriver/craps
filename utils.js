@@ -143,6 +143,29 @@ module.exports = {
 
     return baseBet;
   },
+  readBets: function(context) {
+    const res = require('./' + context.event.request.locale + '/resources');
+    const game = context.attributes[context.attributes.currentGame];
+    let speech = '';
+
+    if (context.attributes.STATE === 'POINT') {
+      speech += res.strings.READ_POINT.replace('{0}', game.point);
+    }
+    if (game.bets) {
+      const betNames = [];
+
+      game.bets.forEach((bet) => {
+        if (!bet.notWorking) {
+          betNames.push(res.sayBet(bet));
+        }
+      });
+
+      if (betNames.length) {
+        speech += res.strings.READ_BETS.replace('{0}', speechUtils.and(betNames));
+      }
+    }
+    return speech;
+  },
   betsMatch: function(bet1, bet2) {
     // Bets match if the types match
     // and numbers for Place or Hardway bets

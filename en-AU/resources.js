@@ -50,7 +50,8 @@ const resources = {
   // From HighScore.js
   'HIGHSCORE_REPROMPT': 'What else can I help you with?',
   // Launch.js
-  'LAUNCH_REPROMPT': 'You can place a line bet or say read high scores to hear the leader board.',
+  'LAUNCH_REPROMPT': 'Say bet to place a line bet.',
+  'LAUNCH_REPROMPT_ROLL': 'Say roll to roll the dice.',
   'LAUNCH_WELCOME': 'Welcome to Craps Table. ',
   'LAUNCH_WELCOME_NAME': 'Welcome back {0}. ',
   'LAUNCH_REGISTER': ' <break time=\'300ms\'/>If you would like to register to have your name on the leader board please visit the Alexa companion app. ',
@@ -77,7 +78,7 @@ const resources = {
   'RESET_NORESET': 'Sorry, you can\'t reset your bankroll. What else can I help you with?',
   // From Roll.js
   'ROLL_RESULT': 'You got {0}. ',
-  'ROLL_NOBETS': 'Sorry, you have to place a line bet before you can roll the dice.',
+  'ROLL_NOBETS': 'Sorry, you have to place a line bet before you can roll the dice. Say bet to place a line bet.',
   'ROLL_INVALID_REPROMPT': 'Place a bet',
   'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of ${0} can\'t support your last line bet.',
   'ROLL_BUSTED': 'You lost all your money. Resetting to $1000 and clearing your bets. ',
