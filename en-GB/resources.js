@@ -78,9 +78,10 @@ const resources = {
   'RESET_NORESET': 'Sorry, you can\'t reset your bankroll. What else can I help you with?',
   // From Roll.js
   'ROLL_RESULT': 'You got {0}. ',
-  'ROLL_NOBETS': 'Sorry, you have to place a line bet before you can roll the dice. Say bet to place a line bet.',
+  'ROLL_NOBETS': 'Sorry, you need to place a line bet before rolling the dice and you don\'t have enough money in your bankroll. Say remove my bet to remove your last bet.',
+  'ROLL_PASSBET_PLACED': 'Placing a pass bet of £{0}. ',
   'ROLL_INVALID_REPROMPT': 'Place a bet',
-  'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of £{0} can\'t support your last line bet.',
+  'ROLL_CANTBET_LASTBETS': 'Sorry, your bankroll of £{0} can\'t support your last line bet. Say remove my bet to remove your last bet.',
   'ROLL_BUSTED': 'You lost all your money. Resetting to £1000 and clearing your bets. ',
   'ROLL_BUSTED_REPROMPT': 'Place new bets.',
   'ROLL_NET_WIN': ' You won £{0}. ',

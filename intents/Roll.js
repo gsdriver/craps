@@ -35,10 +35,25 @@ module.exports = {
     }
 
     if (!game.lineBet) {
-      speechError = res.strings.ROLL_NOBETS;
-      reprompt = res.strings.ROLL_INVALID_REPROMPT;
-      utils.emitResponse(this.emit, this.event.request.locale, speechError, null, speech, reprompt);
-      return;
+      // Place a bet for them if the bankroll can afford it
+      // Should be edge case that they
+      if (game.bankroll >= game.minBet) {
+        speech = res.strings.ROLL_PASSBET_PLACED.replace('{0}', game.minBet);
+        game.bankroll -= game.minBet;
+        game.lineBet = game.minBet;
+        game.passPlayer = true;
+        const bet = utils.createLineBet(game.minBet, game.passPlayer);
+        if (game.bets) {
+          game.bets.push(bet);
+        } else {
+          game.bets = [bet];
+        }
+      } else {
+        speechError = res.strings.ROLL_NOBETS;
+        reprompt = res.strings.ROLL_INVALID_REPROMPT;
+        utils.emitResponse(this.emit, this.event.request.locale, speechError, null, speech, reprompt);
+        return;
+      }
     }
 
     // Pick two random dice rolls
