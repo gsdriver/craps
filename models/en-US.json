@@ -355,6 +355,7 @@
         },
         {
           "name": "RollIntent",
+          "slots": [],
           "samples": [
             "roll the dice",
             "shoot the dice",
@@ -365,6 +366,7 @@
         },
         {
           "name": "HighScoreIntent",
+          "slots": [],
           "samples": [
             "read high scores",
             "tell me high scores",
@@ -377,6 +379,7 @@
         },
         {
           "name": "ResetIntent",
+          "slots": [],
           "samples": [
             "reset game",
             "reset bankroll",
@@ -388,26 +391,77 @@
           ]
         },
         {
-          "name": "AMAZON.RepeatIntent"
+          "name": "AMAZON.RepeatIntent",
+          "samples": []
         },
         {
-          "name": "AMAZON.YesIntent"
+          "name": "AMAZON.YesIntent",
+          "samples": []
         },
         {
-          "name": "AMAZON.NoIntent"
+          "name": "AMAZON.NoIntent",
+          "samples": []
         },
         {
-          "name": "AMAZON.HelpIntent"
+          "name": "AMAZON.HelpIntent",
+          "samples": []
         },
         {
-          "name": "AMAZON.StopIntent"
+          "name": "AMAZON.StopIntent",
+          "samples": []
         },
         {
-          "name": "AMAZON.CancelIntent"
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.MoreIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": []
         }
       ],
       "types": [
         {
+          "name": "LIST_OF_BETS",
           "values": [
             {
               "name": {
@@ -504,8 +558,7 @@
                 "value": "place bet"
               }
             }
-          ],
-          "name": "LIST_OF_BETS"
+          ]
         }
       ]
     }

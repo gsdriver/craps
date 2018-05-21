@@ -49,6 +49,7 @@ module.exports = {
       console.log(JSON.stringify(globalEvent));
     }
 
+    buildDisplayTemplate(context);
     if (error) {
       const res = require('./' + locale + '/resources');
       console.log('Speech error: ' + error);
@@ -258,3 +259,34 @@ module.exports = {
     });
   },
 };
+
+function buildDisplayTemplate(context) {
+  const game = context.attributes[context.attributes.currentGame];
+  const res = require('./' + context.event.request.locale + '/resources');
+
+  if (context.event.context &&
+      context.event.context.System.device.supportedInterfaces.Display) {
+    context.attributes.display = true;
+
+    // Build up the image name based on the dice rolled
+    let name;
+    const title = res.strings.HELP_CARD_TITLE;
+    if (game.dice && (game.dice.length == 2)) {
+      if (game.dice[0] < game.dice[1]) {
+        name = 'craps' + game.dice[0] + game.dice[1] + '.png';
+      } else {
+        name = 'craps' + game.dice[1] + game.dice[0] + '.png';
+      }
+    } else {
+      name = 'craps.png';
+    }
+
+    const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+    const template = builder.setTitle(title)
+      .setBackgroundImage(makeImage('https://s3.amazonaws.com/garrett-alexa-images/craps/' + name))
+      .setBackButtonBehavior('HIDDEN')
+      .build();
+
+    context.response.renderTemplate(template);
+  }
+}
