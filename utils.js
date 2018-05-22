@@ -8,12 +8,15 @@ const AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
 const speechUtils = require('alexa-speech-utils')();
 const request = require('request');
+const Alexa = require('alexa-sdk');
+// utility methods for creating Image and TextField objects
+const makeImage = Alexa.utils.ImageUtils.makeImage;
 
 // Global session ID
 let globalEvent;
 
 module.exports = {
-  emitResponse: function(emit, locale, error, response, speech,
+  emitResponse: function(context, error, response, speech,
                         reprompt, cardTitle, cardText, linQ) {
     const formData = {};
 
@@ -51,17 +54,17 @@ module.exports = {
 
     buildDisplayTemplate(context);
     if (error) {
-      const res = require('./' + locale + '/resources');
+      const res = require('./' + context.event.request.locale + '/resources');
       console.log('Speech error: ' + error);
-      emit(':ask', error, res.ERROR_REPROMPT);
+      context.emit(':ask', error, res.ERROR_REPROMPT);
     } else if (response) {
-      emit(':tell', response);
+      context.emit(':tell', response);
     } else if (cardTitle) {
-      emit(':askWithCard', speech, reprompt, cardTitle, cardText);
+      context.emit(':askWithCard', speech, reprompt, cardTitle, cardText);
     } else if (linQ) {
-      emit(':askWithLinkAccountCard', linQ, reprompt);
+      context.emit(':askWithLinkAccountCard', linQ, reprompt);
     } else {
-      emit(':ask', speech, reprompt);
+      context.emit(':ask', speech, reprompt);
     }
   },
   betAmount: function(intent, game) {
@@ -272,16 +275,12 @@ function buildDisplayTemplate(context) {
     let name;
     const title = res.strings.HELP_CARD_TITLE;
     if (game.dice && (game.dice.length == 2)) {
-      if (game.dice[0] < game.dice[1]) {
-        name = 'craps' + game.dice[0] + game.dice[1] + '.png';
-      } else {
-        name = 'craps' + game.dice[1] + game.dice[0] + '.png';
-      }
+      name = 'craps' + game.dice[0] + game.dice[1] + '.png';
     } else {
       name = 'craps.png';
     }
 
-    const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+    const builder = new Alexa.templateBuilders.BodyTemplate6Builder();
     const template = builder.setTitle(title)
       .setBackgroundImage(makeImage('https://s3.amazonaws.com/garrett-alexa-images/craps/' + name))
       .setBackButtonBehavior('HIDDEN')

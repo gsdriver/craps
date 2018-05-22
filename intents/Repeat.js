@@ -16,7 +16,6 @@ module.exports = {
     speech += res.strings.READ_BANKROLL.replace('{0}', game.bankroll);
     speech += utils.readBets(this);
     speech += reprompt;
-    utils.emitResponse(this.emit, this.event.request.locale,
-        null, null, speech, reprompt);
+    utils.emitResponse(this, null, null, speech, reprompt);
   },
 };

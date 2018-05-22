@@ -17,8 +17,7 @@ module.exports = {
     // Do they have any bets to remove?
     if (!game.bets && (this.event.request.intent.name !== 'RemoveIntent')) {
       ads.getAd(this.attributes, 'craps', this.event.request.locale, (adText) => {
-        utils.emitResponse(this.emit, this.event.request.locale,
-          null, res.strings.EXIT_GAME.replace('{0}', adText), null, null);
+        utils.emitResponse(this, null, res.strings.EXIT_GAME.replace('{0}', adText), null, null);
       });
     } else {
       // Do they have any bets to remove?
@@ -107,7 +106,7 @@ module.exports = {
       }
 
       speech += reprompt;
-      utils.emitResponse(this.emit, this.event.request.locale, null, null, speech, reprompt);
+      utils.emitResponse(this, null, null, speech, reprompt);
     }
   },
 };

@@ -22,8 +22,7 @@ module.exports = {
       if (game.lineBet > game.bankroll) {
         speechError = res.strings.ROLL_CANTBET_LASTBETS.replace('{0}', game.bankroll);
         reprompt = res.strings.ROLL_INVALID_REPROMPT;
-        utils.emitResponse(this.emit, this.event.request.locale,
-              speechError, null, speech, reprompt);
+        utils.emitResponse(this, speechError, null, speech, reprompt);
         return;
       } else {
         game.bankroll -= game.lineBet;
@@ -51,7 +50,7 @@ module.exports = {
       } else {
         speechError = res.strings.ROLL_NOBETS;
         reprompt = res.strings.ROLL_INVALID_REPROMPT;
-        utils.emitResponse(this.emit, this.event.request.locale, speechError, null, speech, reprompt);
+        utils.emitResponse(this, speechError, null, speech, reprompt);
         return;
       }
     }
@@ -295,7 +294,6 @@ module.exports = {
 
     // And reprompt
     speech += reprompt;
-    utils.emitResponse(this.emit, this.event.request.locale,
-                  speechError, null, speech, reprompt);
+    utils.emitResponse(this, speechError, null, speech, reprompt);
   },
 };

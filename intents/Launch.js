@@ -40,10 +40,10 @@ module.exports = {
     }
 
     if (linQ) {
-      utils.emitResponse(this.emit, this.event.request.locale, null, null,
+      utils.emitResponse(this, null, null,
             null, reprompt, null, null, speech);
     } else {
-      utils.emitResponse(this.emit, this.event.request.locale, null, null,
+      utils.emitResponse(this, null, null,
             speech, reprompt);
     }
   },

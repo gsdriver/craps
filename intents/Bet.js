@@ -294,6 +294,6 @@ module.exports = {
       speechError += (' ' + reprompt);
     }
 
-    utils.emitResponse(this.emit, this.event.request.locale, speechError, null, speech, reprompt);
+    utils.emitResponse(this, speechError, null, speech, reprompt);
   },
 };
