@@ -258,7 +258,6 @@ function myResponse(appId) {
 }
 
 myResponse.succeed = function(result) {
-console.log(JSON.stringify(result));
   if (result.response.outputSpeech.ssml) {
     console.log('AS SSML: ' + result.response.outputSpeech.ssml);
   } else {

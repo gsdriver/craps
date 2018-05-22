@@ -56,16 +56,24 @@ module.exports = {
     if (error) {
       const res = require('./' + context.event.request.locale + '/resources');
       console.log('Speech error: ' + error);
-      context.emit(':ask', error, res.ERROR_REPROMPT);
+      context.response.speak(error)
+        .listen(res.strings.ERROR_REPROMPT);
     } else if (response) {
-      context.emit(':tell', response);
+      context.response.speak(response);
     } else if (cardTitle) {
-      context.emit(':askWithCard', speech, reprompt, cardTitle, cardText);
+      context.response.speak(speech)
+        .listen(reprompt)
+        .cardRenderer(cardTitle, cardText);
     } else if (linQ) {
-      context.emit(':askWithLinkAccountCard', linQ, reprompt);
+      context.response.speak(speech)
+        .listen(reprompt)
+        .linkAccountCard();
     } else {
-      context.emit(':ask', speech, reprompt);
+      context.response.speak(speech)
+        .listen(reprompt);
     }
+
+    context.emit(':responseReady');
   },
   betAmount: function(intent, game) {
     let amount = game.minBet;
@@ -265,7 +273,6 @@ module.exports = {
 
 function buildDisplayTemplate(context) {
   const game = context.attributes[context.attributes.currentGame];
-  const res = require('./' + context.event.request.locale + '/resources');
 
   if (context.event.context &&
       context.event.context.System.device.supportedInterfaces.Display) {
@@ -273,19 +280,17 @@ function buildDisplayTemplate(context) {
 
     // Build up the image name based on the dice rolled
     let name;
-    const title = res.strings.HELP_CARD_TITLE;
     if (game.dice && (game.dice.length == 2)) {
       name = 'craps' + game.dice[0] + game.dice[1] + '.png';
     } else {
       name = 'craps.png';
     }
 
-    const builder = new Alexa.templateBuilders.BodyTemplate6Builder();
-    const template = builder.setTitle(title)
+    const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+    const template = builder.setTitle('')
       .setBackgroundImage(makeImage('https://s3.amazonaws.com/garrett-alexa-images/craps/' + name))
       .setBackButtonBehavior('HIDDEN')
       .build();
-
     context.response.renderTemplate(template);
   }
 }
