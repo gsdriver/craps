@@ -11,6 +11,7 @@ const request = require('request');
 const Alexa = require('alexa-sdk');
 // utility methods for creating Image and TextField objects
 const makeImage = Alexa.utils.ImageUtils.makeImage;
+const makePlainText = Alexa.utils.TextUtils.makePlainText;
 
 // Global session ID
 let globalEvent;
@@ -273,6 +274,7 @@ module.exports = {
 
 function buildDisplayTemplate(context) {
   const game = context.attributes[context.attributes.currentGame];
+  const res = require('./' + context.event.request.locale + '/resources');
 
   if (context.event.context &&
       context.event.context.System.device.supportedInterfaces.Display) {
@@ -290,6 +292,7 @@ function buildDisplayTemplate(context) {
     const template = builder.setTitle('')
       .setBackgroundImage(makeImage('https://s3.amazonaws.com/garrett-alexa-images/craps/' + name))
       .setBackButtonBehavior('HIDDEN')
+      .setTextContent(makePlainText(res.strings.HELP_CARD_TITLE))
       .build();
     context.response.renderTemplate(template);
   }
