@@ -24,7 +24,7 @@ module.exports = {
       reprompt = res.strings.RESET_INVALIDACTION_REPROMPT;
     }
 
-    utils.emitResponse(this.emit, this.event.request.locale, null, null, speech, reprompt);
+    utils.emitResponse(this, null, null, speech, reprompt);
   },
   handleYesReset: function() {
     // Confirmed - let's reset
@@ -39,7 +39,7 @@ module.exports = {
 
     this.handler.state = this.attributes.savedState;
     this.attributes.savedState = undefined;
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
           res.strings.RESET_COMPLETED, res.strings.RESET_REPROMPT);
   },
   handleNoReset: function() {
@@ -48,7 +48,7 @@ module.exports = {
 
     this.handler.state = this.attributes.savedState;
     this.attributes.savedState = undefined;
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
           res.strings.RESET_ABORTED, res.strings.RESET_REPROMPT);
   },
 };

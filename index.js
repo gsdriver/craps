@@ -36,7 +36,7 @@ const resetHandlers = Alexa.CreateStateHandler('CONFIRMRESET', {
   },
   'Unhandled': function() {
     const res = require('./' + this.event.request.locale + '/resources');
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
               res.strings.UNKNOWNINTENT_RESET, res.strings.UNKNOWNINTENT_RESET_REPROMPT);
   },
 });
@@ -74,7 +74,7 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   },
   'Unhandled': function() {
     const res = require('./' + this.event.request.locale + '/resources');
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
           res.strings.UNKNOWN_BET_INTENT, res.strings.UNKNOWN_BET_INTENT_REPROMPT);
   },
 });
@@ -112,7 +112,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   },
   'Unhandled': function() {
     const res = require('./' + this.event.request.locale + '/resources');
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
           res.strings.UNKNOWN_INGAME_INTENT, res.strings.UNKNOWN_INGAME_INTENT_REPROMPT);
   },
 });
@@ -140,7 +140,7 @@ const handlers = {
   'LaunchRequest': Launch.handleIntent,
   'Unhandled': function() {
     const res = require('./' + this.event.request.locale + '/resources');
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
           res.strings.UNKNOWN_INTENT, res.strings.UNKNOWN_INTENT_REPROMPT);
   },
 };

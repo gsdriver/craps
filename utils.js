@@ -8,12 +8,16 @@ const AWS = require('aws-sdk');
 AWS.config.update({region: 'us-east-1'});
 const speechUtils = require('alexa-speech-utils')();
 const request = require('request');
+const Alexa = require('alexa-sdk');
+// utility methods for creating Image and TextField objects
+const makeImage = Alexa.utils.ImageUtils.makeImage;
+const makePlainText = Alexa.utils.TextUtils.makePlainText;
 
 // Global session ID
 let globalEvent;
 
 module.exports = {
-  emitResponse: function(emit, locale, error, response, speech,
+  emitResponse: function(context, error, response, speech,
                         reprompt, cardTitle, cardText, linQ) {
     const formData = {};
 
@@ -49,19 +53,28 @@ module.exports = {
       console.log(JSON.stringify(globalEvent));
     }
 
+    buildDisplayTemplate(context);
     if (error) {
-      const res = require('./' + locale + '/resources');
+      const res = require('./' + context.event.request.locale + '/resources');
       console.log('Speech error: ' + error);
-      emit(':ask', error, res.ERROR_REPROMPT);
+      context.response.speak(error)
+        .listen(res.strings.ERROR_REPROMPT);
     } else if (response) {
-      emit(':tell', response);
+      context.response.speak(response);
     } else if (cardTitle) {
-      emit(':askWithCard', speech, reprompt, cardTitle, cardText);
+      context.response.speak(speech)
+        .listen(reprompt)
+        .cardRenderer(cardTitle, cardText);
     } else if (linQ) {
-      emit(':askWithLinkAccountCard', linQ, reprompt);
+      context.response.speak(speech)
+        .listen(reprompt)
+        .linkAccountCard();
     } else {
-      emit(':ask', speech, reprompt);
+      context.response.speak(speech)
+        .listen(reprompt);
     }
+
+    context.emit(':responseReady');
   },
   betAmount: function(intent, game) {
     let amount = game.minBet;
@@ -258,3 +271,29 @@ module.exports = {
     });
   },
 };
+
+function buildDisplayTemplate(context) {
+  const game = context.attributes[context.attributes.currentGame];
+  const res = require('./' + context.event.request.locale + '/resources');
+
+  if (context.event.context &&
+      context.event.context.System.device.supportedInterfaces.Display) {
+    context.attributes.display = true;
+
+    // Build up the image name based on the dice rolled
+    let name;
+    if (game.dice && (game.dice.length == 2)) {
+      name = 'craps' + game.dice[0] + game.dice[1] + '.png';
+    } else {
+      name = 'craps.png';
+    }
+
+    const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+    const template = builder.setTitle('')
+      .setBackgroundImage(makeImage('https://s3.amazonaws.com/garrett-alexa-images/craps/' + name))
+      .setBackButtonBehavior('HIDDEN')
+      .setTextContent(makePlainText(res.strings.HELP_CARD_TITLE))
+      .build();
+    context.response.renderTemplate(template);
+  }
+}

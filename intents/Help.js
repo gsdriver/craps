@@ -37,7 +37,7 @@ module.exports = {
     helpText += res.strings.HELP_CARD_TEXT.replace('{0}', res.betRange(game));
     speech += reprompt;
 
-    utils.emitResponse(this.emit, this.event.request.locale, null, null,
+    utils.emitResponse(this, null, null,
             speech, reprompt, res.strings.HELP_CARD_TITLE, helpText);
   },
 };
