@@ -6,6 +6,7 @@
 
 const AWS = require('aws-sdk');
 const Alexa = require('alexa-sdk');
+const CanFulfill = require('./intents/CanFulfill');
 const Launch = require('./intents/Launch');
 const Bet = require('./intents/Bet');
 const Roll = require('./intents/Roll');
@@ -28,6 +29,7 @@ const resetHandlers = Alexa.CreateStateHandler('CONFIRMRESET', {
   },
   'LaunchRequest': Reset.handleNoReset,
   'AMAZON.YesIntent': Reset.handleYesReset,
+  'AMAZON.FallbackIntent': Reset.handleNoReset,
   'AMAZON.NoIntent': Reset.handleNoReset,
   'AMAZON.StopIntent': Exit.handleIntent,
   'AMAZON.CancelIntent': Reset.handleNoReset,
@@ -63,6 +65,7 @@ const noPointHandlers = Alexa.CreateStateHandler('NOPOINT', {
   'RollIntent': Roll.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'ResetIntent': Reset.handleIntent,
+  'AMAZON.FallbackIntent': Repeat.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
   'AMAZON.NoIntent': Remove.handleIntent,
@@ -101,6 +104,7 @@ const pointHandlers = Alexa.CreateStateHandler('POINT', {
   'RollIntent': Roll.handleIntent,
   'HighScoreIntent': HighScore.handleIntent,
   'ResetIntent': Reset.handleIntent,
+  'AMAZON.FallbackIntent': Repeat.handleIntent,
   'AMAZON.RepeatIntent': Repeat.handleIntent,
   'AMAZON.YesIntent': Roll.handleIntent,
   'AMAZON.NoIntent': Remove.handleIntent,
@@ -154,6 +158,12 @@ if (process.env.DASHBOTKEY) {
 
 function runGame(event, context, callback) {
   AWS.config.update({region: 'us-east-1'});
+
+  // If this is a CanFulfill, handle this separately
+  if (event.request && (event.request.type == 'CanFulfillIntentRequest')) {
+    context.succeed(CanFulfill.check(event));
+    return;
+  }
 
   const alexa = Alexa.handler(event, context);
 
