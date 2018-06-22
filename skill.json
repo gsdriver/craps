@@ -1,0 +1,117 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Roll the dice - will you be a big winner? Place multiple bets on the craps table and see how you do!",
+          "examplePhrases": [
+            "Alexa, open craps table",
+            "bet ten dollars",
+            "place a field bet for ten dollars"
+          ],
+          "keywords": [
+            "craps",
+            "casino",
+            "game"
+          ],
+          "name": "Craps Table",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/8945/2e837d7b207d484dbcec8a0bb6647ee2/APP_ICON?versionId=lNcel2TTEIWiohl3An_4Ms9pR3EYqXsK&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=z49%2BtQGwY8Xhet4dzS4OvPWFy%2Fo%3D",
+          "description": "Roll the dice - will you be a big winner? Place multiple bets on the craps table - pass or don't pass, and take odds. You can also place bets on the field, numbers, hard way bets, and many other popular table bets! Keep track of your high score and compare how you're doing with other players by saying \"read high scores\" to hear the leader board. Keep playing and you can move to the top!\n\nHave feedback or want to share your thoughts on this skill? Connect with us on Facebook at https://www.facebook.com/alexacasinogames!",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/e435/9a763c01ec0f4303b853df644fbb42d9/APP_ICON_LARGE?versionId=rafvs3CV.GE18OGxhtQ_EaH4FmQf.7J1&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=n%2BMO9xXNFYQm%2BrtWWxWdbfKD%2F9M%3D"
+        },
+        "en-CA": {
+          "summary": "Roll the dice - will you be a big winner? Place multiple bets on the craps table and see how you do!",
+          "examplePhrases": [
+            "Alexa, open craps table",
+            "bet ten dollars",
+            "place a field bet for ten dollars"
+          ],
+          "keywords": [
+            "craps",
+            "casino",
+            "game"
+          ],
+          "name": "Craps Table",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/2be0/b434107be97c42339ca39f7c4c8b3842/APP_ICON?versionId=QQEfA2qi1IqPScW51yY7Ai6wxtnRWVZR&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=9hdzd97cHwUh%2Fi3X9oMnOmvAhi4%3D",
+          "description": "Roll the dice - will you be a big winner? Place multiple bets on the craps table - pass or don't pass, and take odds. You can also place bets on the field, numbers, hard way bets, and many other popular table bets! Keep track of your high score and compare how you're doing with other players by saying \"read high scores\" to hear the leader board. Keep playing and you can move to the top!\n\nHave feedback or want to share your thoughts on this skill? Connect with us on Facebook at https://www.facebook.com/alexacasinogames!",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/981f/8a8d26a405ef48c591b903d0f0da6af7/APP_ICON_LARGE?versionId=j0eYF7D.sTzSFH8hdxnfMtone3hupGRp&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=Jgq1%2FTDJfiocIS5XhJHT27CVpV4%3D"
+        },
+        "en-IN": {
+          "summary": "Roll the dice - will you be a big winner? Place multiple bets on the craps table and see how you do!",
+          "examplePhrases": [
+            "Alexa, open craps table",
+            "bet ten dollars",
+            "place a field bet for ten dollars"
+          ],
+          "keywords": [
+            "craps",
+            "casino",
+            "game"
+          ],
+          "name": "Craps Table",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/3a3e/b6bfd33a0e47436b9f7e62f70f7b9fef/APP_ICON?versionId=ktiSqh_7ebbkNFbeVVt_iAI50qe_cuWw&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=bwJa5Tf%2BkEFZNpgG6%2BTkeqjiCLY%3D",
+          "description": "Roll the dice - will you be a big winner? Place multiple bets on the craps table - pass or don't pass, and take odds. You can also place bets on the field, numbers, hard way bets, and many other popular table bets! Keep track of your high score and compare how you're doing with other players by saying \"read high scores\" to hear the leader board. Keep playing and you can move to the top!\n\nHave feedback or want to share your thoughts on this skill? Connect with us on Facebook at https://www.facebook.com/alexacasinogames!",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/80ab/1e4888aaf7424b7798d43678d601863e/APP_ICON_LARGE?versionId=9Pbo18cIhcPw.NcTNRvexLv20MB3sxqq&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=sicz7G2SlsMNM0%2F9Uu1cLgdL8VI%3D"
+        },
+        "en-AU": {
+          "summary": "Roll the dice - will you be a big winner? Place multiple bets on the craps table and see how you do!",
+          "examplePhrases": [
+            "Alexa, open craps table",
+            "bet ten dollars",
+            "place a field bet for ten dollars"
+          ],
+          "keywords": [
+            "craps",
+            "casino",
+            "game"
+          ],
+          "name": "Craps Table",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/8945/2e837d7b207d484dbcec8a0bb6647ee2/APP_ICON?versionId=lNcel2TTEIWiohl3An_4Ms9pR3EYqXsK&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=z49%2BtQGwY8Xhet4dzS4OvPWFy%2Fo%3D",
+          "description": "Roll the dice - will you be a big winner? Place multiple bets on the craps table - pass or don't pass, and take odds. You can also place bets on the field, numbers, hard way bets, and many other popular table bets! Keep track of your high score and compare how you're doing with other players by saying \"read high scores\" to hear the leader board. Keep playing and you can move to the top!\n\nHave feedback or want to share your thoughts on this skill? Connect with us on Facebook at https://www.facebook.com/alexacasinogames!",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/e435/9a763c01ec0f4303b853df644fbb42d9/APP_ICON_LARGE?versionId=rafvs3CV.GE18OGxhtQ_EaH4FmQf.7J1&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=n%2BMO9xXNFYQm%2BrtWWxWdbfKD%2F9M%3D"
+        },
+        "en-GB": {
+          "summary": "Roll the dice - will you be a big winner? Place multiple bets on the craps table and see how you do!",
+          "examplePhrases": [
+            "Alexa, open craps table",
+            "bet ten pounds",
+            "place a field bet for ten pounds"
+          ],
+          "keywords": [
+            "craps",
+            "casino",
+            "game"
+          ],
+          "name": "Craps Table",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/57f9/24949f1972fb47a8b7eb11451958863f/APP_ICON?versionId=1O9PTdLM.hpaprDnL4oxkB_O6O3reJLn&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=TQW7fcGvpPWz5dXSTtYa2paxccA%3D",
+          "description": "Roll the dice - will you be a big winner? Place multiple bets on the craps table - pass or don't pass, and take odds. You can also place bets on the field, numbers, hard way bets, and many other popular table bets! Keep track of your high score and compare how you're doing with other players by saying \"read high scores\" to hear the leader board. Keep playing and you can move to the top!\n\nHave feedback or want to share your thoughts on this skill? Connect with us on Facebook at https://www.facebook.com/alexacasinogames!",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/a237/fed40aded11a474ab543537d5af9b80f/APP_ICON_LARGE?versionId=yY9HG7T2WrWMzZ3CdPBYd06Rny9UmXG2&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1529766902&Signature=Mkrt00TMdfl7OehiL607r5yGyFA%3D"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "This skill allows you to play different bets on a craps table, and allows you to roll until you match an established point or hit a seven to end the round.",
+      "category": "GAMES",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda\\custom"
+        },
+        "interfaces": [
+          {
+            "type": "RENDER_TEMPLATE"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
+  }
+}

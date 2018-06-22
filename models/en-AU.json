@@ -355,7 +355,6 @@
         },
         {
           "name": "RollIntent",
-          "slots": [],
           "samples": [
             "roll the dice",
             "shoot the dice",
@@ -366,7 +365,6 @@
         },
         {
           "name": "HighScoreIntent",
-          "slots": [],
           "samples": [
             "read high scores",
             "tell me high scores",
@@ -379,7 +377,6 @@
         },
         {
           "name": "ResetIntent",
-          "slots": [],
           "samples": [
             "reset game",
             "reset bankroll",
@@ -461,7 +458,6 @@
       ],
       "types": [
         {
-          "name": "LIST_OF_BETS",
           "values": [
             {
               "name": {
@@ -558,7 +554,8 @@
                 "value": "place bet"
               }
             }
-          ]
+          ],
+          "name": "LIST_OF_BETS"
         }
       ]
     }

@@ -4,11 +4,11 @@
       "skill_id": "amzn1.ask.skill.f899a65f-5849-4ecd-a7fb-9b659e21fccb",
       "was_cloned": true,
       "merge": {
-        "skillManifest": {
+        "manifest": {
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "arn:aws:lambda:us-east-1:129065607926:function:Craps"
+                "uri": "arn:aws:lambda:us-east-1:129065607926:function:Craps_v2"
               }
             }
           }
